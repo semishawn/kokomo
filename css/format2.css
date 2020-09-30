@@ -1,24 +1,24 @@
 .code-half {
-	height: 100%;
-	box-sizing: border-box;
-	padding: var(--padding);
 	float: left;
+	height: 100%;
+	padding: var(--padding);
+	box-sizing: border-box;
 	overflow: hidden;
 }
 .gutter-horizontal {
-	height: 100%;
 	float: left;
+	height: 100%;
 	background-color: rgba(0, 0, 0, 0.1);
 	cursor: col-resize;
 }
 .result-half {
-	height: 100%;
+	float: left;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-sizing: border-box;
+	height: 100%;
 	padding: var(--padding);
-	float: left;
+	box-sizing: border-box;
 	overflow: hidden;
 }
 .gutter-vertical {
@@ -30,6 +30,8 @@
 
 
 .code-container {
+	display: flex;
+	flex-direction: column-reverse;
 	height: 100%;
 	width: 100%;
 }
