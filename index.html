@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Kokomo</title>
+	<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+	<script src="https://kit.fontawesome.com/5978d27576.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
+	<link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="css/fonts.css">
+
+	<!--Codemirror-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/display/placeholder.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/emmet-codemirror@1.2.5/dist/emmet.min.js"></script>
+	<link rel="stylesheet" href="css/semi.css">
+
+	<!--My Styles-->
+	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/format1.css">
+</head>
+
+<body>
+	<div class="nav">
+		<div class="logo">KOKOMO EDITOR</div>
+
+		<div class="button-container">
+			<button class="button run">Run</button>
+			<button class="button save">Save</button>
+		</div>
+
+		<div class="format-container">
+			<input type="radio" name="format" id="stacked-format" autocomplete="off" checked>
+			<label class="icon-label" for="stacked-format"><i class="fas fa-layer-group"></i></label>
+
+			<input type="radio" name="format" id="codepen-format" autocomplete="off">
+			<label class="icon-label" for="codepen-format"><i class="fas fa-bars"></i></label>
+		</div>
+	</div>
+
+	<div class="editor">
+		<div class="half code-half">
+			<div class="code-container">
+				<!--JS-->
+				<div class="code-box js">
+					<div class="tab">
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<span>Javascript</span>
+					</div>
+					<textarea id="js-editor" placeholder="Type your Javascript here..."></textarea>
+				</div>
+
+				<!--CSS-->
+				<div class="code-box css">
+					<div class="tab">
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<span>CSS</span>
+					</div>
+					<textarea id="css-editor" placeholder="Type your CSS here..."></textarea>
+				</div>
+
+				<!--HTML-->
+				<div class="code-box html">
+					<div class="tab">
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<span>HTML</span>
+					</div>
+					<textarea id="html-editor" placeholder="Type your HTML here..."></textarea>
+				</div>
+			</div>
+		</div>
+
+		<!--Result-->
+		<div class="half result-half">
+			<div class="result-container">
+				<div class="tab">
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<div class="circle"></div>
+					<span>Result</span>
+					<div class="result-size-container">
+						<input type="radio" name="devices" id="desktop-size" autocomplete="off" checked>
+						<label class="icon-label" for="desktop-size"><i class="fas fa-arrows-alt"></i></label>
+
+						<input type="radio" name="devices" id="mobile-size" autocomplete="off">
+						<label class="icon-label" for="mobile-size"><i class="fas fa-mobile-alt"></i></label>
+					</div>
+				</div>
+				<iframe class="result"></iframe>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/codemirror.js"></script>
+	<script src="js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+.code-half {
+	height: 100%;
+	box-sizing: border-box;
+	padding: var(--padding);
+	float: left;
+	overflow: hidden;
+}
+.gutter-horizontal {
+	height: 100%;
+	float: left;
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: col-resize;
+}
+.result-half {
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	padding: var(--padding);
+	float: left;
+	overflow: hidden;
+}
+.gutter-vertical {
+	height: 10px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: row-resize;
+}
+
+
+.code-container {
+	height: 100%;
+	width: 100%;
+}
+.code-box {
+	height: calc(100%/3);
+	border-radius: var(--radius);
+	box-shadow: 0 0 25px rgba(0,0,0,0.3);
+}

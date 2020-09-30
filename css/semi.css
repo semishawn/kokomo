@@ -1,0 +1,53 @@
+.cm-s-semi.CodeMirror { background: #343D46; color: #E5E6DD; }
+.cm-s-semi div.CodeMirror-selected { background: #3E4952; }
+.cm-s-semi .CodeMirror-line::selection, .cm-s-semi .CodeMirror-line > span::selection, .cm-s-semi .CodeMirror-line > span > span::selection { background: #3E4952; }
+.cm-s-semi .CodeMirror-line::-moz-selection, .cm-s-semi .CodeMirror-line > span::-moz-selection, .cm-s-semi .CodeMirror-line > span > span::-moz-selection { background: rgba(25, 30, 42, 99); }
+.cm-s-semi .CodeMirror-gutters { background: #343D46; border-right: 0px; }
+.cm-s-semi .CodeMirror-guttermarker { color: white; }
+.cm-s-semi .CodeMirror-guttermarker-subtle { color: rgba(112, 122, 140, 66); }
+.cm-s-semi .CodeMirror-linenumber { color: #5c6773; }
+.cm-s-semi .CodeMirror-cursor { border-left: 1px solid #ffcc66; }
+
+/* Global */
+.cm-s-semi span.cm-comment { color: #5c6773; font-style: italic; }
+.cm-s-semi span.cm-atom { color: #ae81ff; }
+.cm-s-semi span.cm-number { color: #ffcc66; }
+.cm-s-semi span.cm-comment.cm-attribute { color: #ffd580; }
+.cm-s-semi span.cm-comment.cm-def { color: #d4bfff; }
+.cm-s-semi span.cm-comment.cm-tag { color: #5ccfe6; }
+.cm-s-semi span.cm-comment.cm-type { color: #5998a6; }
+.cm-s-semi span.cm-keyword { color: #ffa759; }
+.cm-s-semi span.cm-string { color: #99CE9E; }
+
+/* HTML */
+.cm-s-semi span.cm-attribute { color: #C594C5; }  
+.cm-s-semi span.cm-type { color: #ffa759; }
+.cm-s-semi span.cm-def { color: #ffd580; }
+.cm-s-semi span.cm-bracket { color: rgba(92, 207, 230, 80); }
+.cm-s-semi span.cm-tag { color: #EE6A6F; }
+.cm-s-semi span.cm-tag.cm-bracket { color: #4DB3B3; }
+.cm-s-semi span.cm-header { color: #bae67e; }
+.cm-s-semi span.cm-link { color: #5ccfe6; }
+.cm-s-semi span.cm-error { color: #ff3333; }
+
+/* CSS */
+.cm-s-semi span.cm-builtin { color: #C594C5; }
+.cm-s-semi span.cm-qualifier { color: #C594C5; }
+.cm-s-semi span.cm-property { color: #f29e74; }
+
+/* Javascript */
+.cm-s-semi span.cm-variable { color: #cbccc6; }
+.cm-s-semi span.cm-variable-2 { color: #f28779; }
+.cm-s-semi span.cm-variable-3 { color: #5ccfe6; }
+
+
+/* Extra */
+.cm-s-semi .CodeMirror-activeline-background { background: #191e2a; }
+.cm-s-semi .CodeMirror-matchingbracket {
+	text-decoration: underline;
+	color: white !important;
+}
+.cm-s-semi span.CodeMirror-matchingtag {
+	background-color: transparent;
+	border-bottom: 1px solid yellow;
+}

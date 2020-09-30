@@ -1,0 +1,182 @@
+:root {
+	--nav-height: 50px;
+	--tab-height: 38px;
+	--radius: 5px;
+	--padding: 30px;
+}
+
+body {
+	background: linear-gradient(90deg, white, white);
+	height: 100%;
+	margin: 0;
+	overflow: hidden;
+	z-index: 0;
+}
+body:before {
+	content: "";
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	-webkit-mask-image: linear-gradient(to bottom, transparent, white);
+	background: linear-gradient(90deg, white, white);
+	pointer-events: none;
+	z-index: 0;
+}
+
+input[type="radio"] {display: none;}
+
+
+
+/* Nav */
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--nav-height);
+	width: 100%;
+	background-color: #1F2430;
+	font-family: 'San Francisco', sans-serif;
+	font-weight: 500;
+	color: white;
+	font-size: 16px;
+	user-select: none;
+	z-index: 999;
+}
+
+.logo {
+	position: absolute;
+	left: 15px;
+	font-family: 'Fugaz One', cursive;
+	font-size: 25px;
+	color: rgba(255, 255, 255, 0.4);
+}
+
+.button-container {display: flex;}
+
+.button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background: rgb(107, 179, 250);
+	background: linear-gradient(180deg, #53A5FB 0%, rgba(6,125,255,1) 100%);
+	width: 90px;
+	height: 26px;
+	font-family: 'San Francisco', sans-serif;
+	font-weight: 500;
+	color: white;
+	font-size: 16px;
+	border-radius: var(--radius);
+	padding: 0;
+	margin: 0 3px;
+	border: 0;
+	outline: 0;
+	cursor: pointer;
+}
+.button:active {
+	background: linear-gradient(0deg, #53A5FB 0%, rgba(6, 125, 255, 1) 100%);
+}
+
+.format-container {
+	position: absolute;
+	right: 15px;
+}
+
+.icon-label {
+	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 28px;
+	width: 30px;
+	font-size: 17px;
+	font-weight: 400;
+	margin: 2px;
+	border-radius: 4px;
+	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+	color: black;
+	background: white;
+	cursor: pointer;
+}
+input[type="radio"]:checked + .icon-label {
+	background-color: grey;
+	color: white;
+}
+
+
+
+/* Codemirror */
+.CodeMirror {
+	height: calc(100% - var(--tab-height));
+	font-size: 14px;
+	border-bottom-left-radius: var(--radius);
+	border-bottom-right-radius: var(--radius);
+	font-family: 'Fira Code', monospace;
+}
+.CodeMirror pre.CodeMirror-placeholder { color: #5c6773; }
+
+
+
+/* Editors */
+.editor {
+	height: calc(100vh - var(--nav-height));
+	width: 100%;
+	position: relative;
+}
+
+.result-container {
+	height: 100%;
+	width: 100%;
+	border-radius: var(--radius);
+	box-shadow: 0 0 25px rgba(0,0,0,0.3);
+	transition: all 0.5s;
+}
+
+.result {
+	height: calc(100% - var(--tab-height));
+	width: 100%;
+	border: none;
+	border-bottom-left-radius: var(--radius);
+	border-bottom-right-radius: var(--radius);
+	background-color: white;
+}
+
+
+.tab {
+	font-family: 'San Francisco', sans-serif;
+	font-weight: 400;
+	margin: 0;
+	height: var(--tab-height);
+	width: 100%;
+	display: flex;
+	align-items: center;
+	background: rgb(208,207,208);
+	background: linear-gradient(to top, hsl(300, 3%, 82%), hsl(300, 7%, 91%));
+	border-top-left-radius: var(--radius);
+	border-top-right-radius: var(--radius);
+	padding-left: 10px;
+	padding-right: 10px;
+	box-sizing: border-box;
+}
+.circle {
+	--circle-dimension: 13px;
+	width: var(--circle-dimension);
+	height: var(--circle-dimension);
+	border-radius: 50%;
+	margin: 4px;
+	padding: 0;
+	float: right;
+}
+.circle:nth-child(1) { background-color: #F75F5A; }
+.circle:nth-child(2) { background-color: #FABC43; }
+.circle:nth-child(3) { background-color: #37C34A; }
+.tab span {
+	font-size: 16px;
+	font-weight: 500;
+	margin-left: 10px;
+	color: grey;
+}
+
+
+.result-size-container {margin-left: auto;}
