@@ -1,4 +1,4 @@
-var html = CodeMirror.fromTextArea(document.getElementById("html-editor"), {
+var html = CodeMirror.fromTextArea(document.getElementById('html-editor'), {
 	mode: 'htmlmixed',
 	theme: 'semi',
 	lineWrapping: true,
@@ -6,7 +6,7 @@ var html = CodeMirror.fromTextArea(document.getElementById("html-editor"), {
 	matchBrackets: true,
 	autoCloseBrackets: true,
 	matchTags: {bothTags: true},
-	extraKeys: {"Ctrl-J": "toMatchingTag"},
+	extraKeys: {'Ctrl-J': 'toMatchingTag'},
 	smartIndent: false,
 	lineWrapping: false,
 	tabSize: 4,
@@ -18,7 +18,7 @@ emmetCodeMirror(html, {
 	'Cmd-Alt-B': 'emmet.balance_outward'
 });
 
-var css = CodeMirror.fromTextArea(document.getElementById("css-editor"), {
+var css = CodeMirror.fromTextArea(document.getElementById('css-editor'), {
 	mode: 'text/css',
 	theme: 'semi',
 	lineWrapping: true,
@@ -32,7 +32,7 @@ var css = CodeMirror.fromTextArea(document.getElementById("css-editor"), {
 	indentWithTabs: true,
 });
 
-var js = CodeMirror.fromTextArea(document.getElementById("js-editor"), {
+var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 	mode: 'text/javascript',
 	theme: 'semi',
 	lineWrapping: true,

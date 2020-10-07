@@ -1,20 +1,20 @@
+// Generator random hex color
+function randhex() {
+	return '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
+}
+
+// Random background mesh
 $(document).ready(function() {
-	var hex1 = '#';
-	var hex2 = '#';
-	var hex3 = '#';
-	var hex4 = '#';
-	var values = "0123456789ABCDEF";
-	for (var i = 0; i < 6; i++) {
-		hex1 += values[(Math.floor(Math.random() * 16))];
-		hex2 += values[(Math.floor(Math.random() * 16))];
-		hex3 += values[(Math.floor(Math.random() * 16))];
-		hex4 += values[(Math.floor(Math.random() * 16))];
-	};
-	$("body").css("background", "linear-gradient(90deg," + hex1 + ", " + hex2 + ")");
-	$("<style>body:before{background: linear-gradient(90deg," + hex3 + ", " + hex4 + ");}</style>").appendTo('head');
+	var hex1 = randhex();
+	var hex2 = randhex();
+	var hex3 = randhex();
+	var hex4 = randhex();
+	$('body').css('background', `linear-gradient(90deg, ${hex1}, ${hex2})`);
+	$(`<style>body:before{background: linear-gradient(90deg, ${hex3}, ${hex4});}</style>`).appendTo('head');
 });
 
 
+// Bring editor to front on click
 maxZ = $('.code-box:last').css('z-index');
 $('.code-box').click(function() {
 	maxZ++;
@@ -22,15 +22,34 @@ $('.code-box').click(function() {
 });
 
 
+// Update preview
 function updateResult() {
-	var contents = '<style>' + css.getValue() + '</style>' + html.getValue() + '<script>' + js.getValue() + '</script>';
-	$('.result').contents().find('body').html(contents);
+	var result = document.getElementById('result');
+		result = result.contentWindow || result.contentDocument.document || result.contentDocument;
+	var contents = `
+		<!DOCTYPE html>
+		<html>
+
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></scr`+`ipt>
+			<style>${css.getValue()}</style>
+		</head>
+
+		<body>
+			${html.getValue()}
+			<script>${js.getValue()}</scr`+`ipt>
+		</body>
+
+		</html>`;
+	result.document.open();
+	result.document.write(contents);
+	result.document.close();
 }
-$('.run').click(function() {
-	updateResult();
-});
 
 
+// Change result size
 $('.result-size-container').click(function() {
 	if ($('#desktop-size').is(':checked')) {
 		$('.result-container').css({
@@ -47,11 +66,14 @@ $('.result-size-container').click(function() {
 });
 
 
+// Draggable slider between halves
 Split(['.code-half', '.result-half'], {
 	minSize: 350,
 	snapOffset: 0,
 });
 
+
+// Switch editor formats
 $('.format-container').click(function() {
 	if ($('#stacked-format').is(':checked')) {
 		$('link[href="css/format2.css"]').attr('href','css/format1.css');
@@ -61,6 +83,8 @@ $('.format-container').click(function() {
 	};
 });
 
+
+// Format switch function
 function format() {
 	Split(['.js', '.css', '.html'], {
 		direction: 'vertical',
@@ -68,4 +92,12 @@ function format() {
 		minSize: 100,
 		snapOffset: 0,
 	});
-};
+}
+
+
+// Fix numbers not showing bug
+$(document).ready(function() {
+	html.refresh();
+	css.refresh();
+	js.refresh();
+});
