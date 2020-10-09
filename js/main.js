@@ -73,22 +73,23 @@ Split(['.code-half', '.result-half'], {
 });
 
 
-// Switch editor formats
-$('.format-container').click(function() {
-	if ($('#stacked-format').is(':checked')) {
-		$('link[href="css/format2.css"]').attr('href','css/format1.css');
-	};
-	if ($('#codepen-format').is(':checked')) {
-		$('link[href="css/format1.css"]').attr('href','css/format2.css');
-	};
+// Switch editor layouts
+$('.layout-select').click(function() {
+	$('.layout-options').toggleClass('flex');
+});
+$('input[type="radio"][name="layout"]').change(function() {
+	if ($(this).is('#layered-layout')) $('.code-container').attr('class', 'code-container layered');
+	if ($(this).is('#stacked-layout')) $('.code-container').attr('class', 'code-container stacked');
+	if ($(this).is('#boxes-layout')) $('.code-container').attr('class', 'code-container boxes');
+	if ($(this).is('#tabs-layout')) $('.code-container').attr('class', 'code-container tabs');
 });
 
 
-// Format switch function
-function format() {
+// layout switch function
+function horizontalSplit() {
 	Split(['.js', '.css', '.html'], {
 		direction: 'vertical',
-		sizes: [25, 25, 50],
+		sizes: [100/3, 100/3, 100/3],
 		minSize: 100,
 		snapOffset: 0,
 	});

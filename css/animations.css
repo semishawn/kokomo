@@ -31,27 +31,26 @@
 
 
 .nav {
-	animation: fadeDown 1.5s;
+	animation: fadeDown 1.5s forwards;
 	animation-delay: 0.3s;
-	animation-fill-mode: forwards;
 	opacity: 0;
 }
+
 .result-container {
-	animation: fadeUp 1.3s;
+	animation: fadeUp 1.3s forwards;
 	animation-delay: 1.8s;
-	animation-fill-mode: forwards;
 	opacity: 0;
 }
+
 .gutter-horizontal {
-	animation: fadeIn 1.3s;
+	animation: fadeIn 1.3s forwards;
 	animation-delay: 1.8s;
-	animation-fill-mode: forwards;
 	opacity: 0;
 }
+
 .code-box {
-	animation: fadeUp 1.3s;
+	animation: fadeUp 1.3s forwards;
 	animation-delay: 0.6s;
-	animation-fill-mode: forwards;
 	opacity: 0;
 }
 .js {animation-delay: 1.4s;}

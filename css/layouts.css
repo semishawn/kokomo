@@ -1,0 +1,79 @@
+/* Layered */
+.layered {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.layered .code-box {
+	position: absolute;
+	height: calc(100% - 2*var(--tab-height) + 10px);
+	width: calc(100% - 2*var(--tab-height) + 10px);
+}
+.layered .js {
+	top: 0;
+	right: 0;
+	z-index: 1;
+}
+.layered .css {z-index: 1;}
+.layered .html {
+	bottom: 0;
+	left: 0;
+	z-index: 1;
+}
+
+
+
+/* Stacked */
+.stacked {
+	display: flex;
+	flex-direction: column-reverse;
+	justify-content: space-between;
+}
+
+.gutter-vertical {
+	height: 10px;
+	width: 100%;
+	background-color: rgba(0, 0, 0, 0.1);
+	cursor: row-resize;
+}
+
+.stacked .code-box {
+	height: calc(100%/3);
+	margin-bottom: var(--code-box-margin);
+}
+.stacked .js {margin: 0;}
+
+
+
+/* Boxes */
+.boxes .code-box {position: absolute;}
+.boxes .js {
+	bottom: 0;
+	right: 0;
+	height: calc(50% - (var(--code-box-margin)/2));
+	width: calc(50% - (var(--code-box-margin)/2));
+}
+.boxes .css {
+	bottom: 0;
+	left: 0;
+	height: calc(50% - (var(--code-box-margin)/2));
+	width: calc(50% - (var(--code-box-margin)/2));
+}
+.boxes .html {
+	top: 0;
+	height: calc(50% - (var(--code-box-margin)/2));
+	width: 100%;
+}
+
+
+
+/* Tabs */
+.tabs .code-box {
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	box-shadow: none;
+}
+
+.tabs .tab {width: 150px;}

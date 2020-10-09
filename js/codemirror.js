@@ -8,7 +8,7 @@ var html = CodeMirror.fromTextArea(document.getElementById('html-editor'), {
 	matchTags: {bothTags: true},
 	extraKeys: {'Ctrl-J': 'toMatchingTag'},
 	smartIndent: false,
-	lineWrapping: false,
+	lineWrapping: true,
 	tabSize: 4,
 	indentUnit: 4,
 	indentWithTabs: true,

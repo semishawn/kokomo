@@ -29,8 +29,8 @@
 
 	<!--My Styles-->
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/layouts.css">
 	<link rel="stylesheet" href="css/animations.css">
-	<link rel="stylesheet" href="css/format1.css">
 </head>
 
 <body>
@@ -42,31 +42,33 @@
 			<button class="button save">Save</button>
 		</div>
 
-		<div class="format-container">
-			<input type="radio" name="format" id="stacked-format" autocomplete="off" checked>
-			<label class="icon-label" for="stacked-format"><i class="fas fa-layer-group"></i></label>
+		<div class="layout-container">
+			<button class="layout-select">Editor Layout</button>
+			<div class="layout-options">
+				<input type="radio" name="layout" id="layered-layout" autocomplete="off" checked>
+				<label class="layout" for="layered-layout"><img src="img/layered.svg">Layered</label>
 
-			<input type="radio" name="format" id="codepen-format" autocomplete="off">
-			<label class="icon-label" for="codepen-format"><i class="fas fa-bars"></i></label>
+				<input type="radio" name="layout" id="stacked-layout" autocomplete="off">
+				<label class="layout" for="stacked-layout"><img src="img/stacked.svg">Stacked</label>
 
-			<!-- <input type="radio" name="format" id="folder-format" autocomplete="off">
-			<label class="icon-label" for="folder-format"><i class="fas fa-folder"></i></label> -->
-
-			<!-- <input type="radio" name="format" id="squares-format" autocomplete="off">
-			<label class="icon-label" for="squares-format"><i class="fas fa-th-large"></i></label> -->
+				<input type="radio" name="layout" id="boxes-layout" autocomplete="off">
+				<label class="layout" for="boxes-layout"><img src="img/boxes.svg">Boxes</label>
+			</div>
 		</div>
 	</div>
 
 	<div class="editor">
 		<div class="half code-half">
-			<div class="code-container">
+			<div class="code-container layered">
 				<!--JS-->
 				<div class="code-box js">
 					<div class="tab">
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<span>Javascript</span>
+						<div class="circle-container">
+							<div class="circle"></div>
+							<div class="circle"></div>
+							<div class="circle"></div>
+						</div>
+						<span class="tab-title">Javascript</span>
 					</div>
 					<textarea id="js-editor" placeholder="Type your Javascript here..."></textarea>
 				</div>
@@ -74,10 +76,12 @@
 				<!--CSS-->
 				<div class="code-box css">
 					<div class="tab">
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<span>CSS</span>
+						<div class="circle-container">
+							<div class="circle"></div>
+							<div class="circle"></div>
+							<div class="circle"></div>
+						</div>
+						<span class="tab-title">CSS</span>
 					</div>
 					<textarea id="css-editor" placeholder="Type your CSS here..."></textarea>
 				</div>
@@ -85,10 +89,12 @@
 				<!--HTML-->
 				<div class="code-box html">
 					<div class="tab">
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<span>HTML</span>
+						<div class="circle-container">
+							<div class="circle"></div>
+							<div class="circle"></div>
+							<div class="circle"></div>
+						</div>
+						<span class="tab-title">HTML</span>
 					</div>
 					<textarea id="html-editor" placeholder="Type your HTML here..."></textarea>
 				</div>
@@ -99,13 +105,15 @@
 		<div class="half result-half">
 			<div class="result-container">
 				<div class="tab">
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<div class="circle"></div>
-					<span>Result</span>
+					<div class="circle-container">
+						<div class="circle"></div>
+						<div class="circle"></div>
+						<div class="circle"></div>
+					</div>
+					<span class="tab-title">Result</span>
 					<div class="result-size-container">
 						<input type="radio" name="devices" id="desktop-size" autocomplete="off" checked>
-						<label class="icon-label" for="desktop-size"><i class="fas fa-arrows-alt"></i></label>
+						<label class="icon-label" for="desktop-size"><i class="fas fa-expand-arrows-alt"></i></label>
 
 						<input type="radio" name="devices" id="mobile-size" autocomplete="off">
 						<label class="icon-label" for="mobile-size"><i class="fas fa-mobile-alt"></i></label>
