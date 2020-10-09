@@ -14,6 +14,14 @@ $(document).ready(function() {
 });
 
 
+// Fix numbers not showing bug
+$(document).ready(function() {
+	html.refresh();
+	css.refresh();
+	js.refresh();
+});
+
+
 // Bring editor to front on click
 maxZ = $('.code-box:last').css('z-index');
 $('.code-box').click(function() {
@@ -78,8 +86,8 @@ $('.layout-select').click(function() {
 	$('.layout-options').toggleClass('flex');
 });
 $('input[type="radio"][name="layout"]').change(function() {
-	if ($(this).is('#layered-layout')) $('.code-container').attr('class', 'code-container layered');
-	if ($(this).is('#stacked-layout')) $('.code-container').attr('class', 'code-container stacked');
+	if ($(this).is('#layers-layout')) $('.code-container').attr('class', 'code-container layers');
+	if ($(this).is('#stack-layout')) $('.code-container').attr('class', 'code-container stack');
 	if ($(this).is('#boxes-layout')) $('.code-container').attr('class', 'code-container boxes');
 	if ($(this).is('#tabs-layout')) $('.code-container').attr('class', 'code-container tabs');
 });
@@ -94,11 +102,3 @@ function horizontalSplit() {
 		snapOffset: 0,
 	});
 }
-
-
-// Fix numbers not showing bug
-$(document).ready(function() {
-	html.refresh();
-	css.refresh();
-	js.refresh();
-});

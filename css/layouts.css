@@ -1,22 +1,22 @@
-/* Layered */
-.layered {
+/* Layers */
+.layers {
 	display: flex;
 	justify-content: center;
 	align-items: center;
 }
 
-.layered .code-box {
+.layers .code-box {
 	position: absolute;
 	height: calc(100% - 2*var(--tab-height) + 10px);
 	width: calc(100% - 2*var(--tab-height) + 10px);
 }
-.layered .js {
+.layers .js {
 	top: 0;
 	right: 0;
 	z-index: 1;
 }
-.layered .css {z-index: 1;}
-.layered .html {
+.layers .css {z-index: 1;}
+.layers .html {
 	bottom: 0;
 	left: 0;
 	z-index: 1;
@@ -24,8 +24,8 @@
 
 
 
-/* Stacked */
-.stacked {
+/* Stack */
+.stack {
 	display: flex;
 	flex-direction: column-reverse;
 	justify-content: space-between;
@@ -38,11 +38,11 @@
 	cursor: row-resize;
 }
 
-.stacked .code-box {
+.stack .code-box {
 	height: calc(100%/3);
 	margin-bottom: var(--code-box-margin);
 }
-.stacked .js {margin: 0;}
+.stack .js {margin: 0;}
 
 
 

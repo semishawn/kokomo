@@ -129,14 +129,10 @@ input[type="radio"] {display: none;}
 	border-radius: 3px;
 	cursor: pointer;
 }
-.layout img {
-	width: 30px;
-	margin-right: 10px;
-}
 .layout:hover {opacity: 1;}
 input[type="radio"]:checked + .layout {
 	opacity: 1;
-	background: #f6f6f6;
+	background: #eee;
 }
 
 
@@ -144,12 +140,11 @@ input[type="radio"]:checked + .layout {
 /* Codemirror */
 .CodeMirror {
 	height: calc(100% - var(--tab-height));
+	font-family: 'Fira Code', monospace;
 	font-size: 14px;
 	border-bottom-left-radius: var(--radius);
 	border-bottom-right-radius: var(--radius);
-	font-family: 'Fira Code', monospace;
 }
-.CodeMirror pre.CodeMirror-placeholder { color: #5c6773; }
 
 
 
