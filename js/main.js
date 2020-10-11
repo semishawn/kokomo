@@ -3,35 +3,30 @@ function randhex() {
 	return '#' + (Math.random() * 0xFFFFFF << 0).toString(16).padStart(6, '0');
 }
 
-// Random background mesh
+
+// Initialization
 $(document).ready(function() {
-	var hex1 = randhex();
-	var hex2 = randhex();
-	var hex3 = randhex();
-	var hex4 = randhex();
-	$('body').css('background', `linear-gradient(90deg, ${hex1}, ${hex2})`);
-	$(`<style>body:before{background: linear-gradient(90deg, ${hex3}, ${hex4});}</style>`).appendTo('head');
+	$('body').css('background', `linear-gradient(90deg, ${randhex()}, ${randhex()})`);
+	$('head').append(`<style>body:before{background: linear-gradient(90deg, ${randhex()}, ${randhex()});}</style>`);
+
+	html.setValue(localStorage.getItem('currentHtml'));
+	head.setValue(localStorage.getItem('currentHead'));
+	css.setValue(localStorage.getItem('currentCss'));
+	js.setValue(localStorage.getItem('currentJs'));
 });
 
 
-// Fix numbers not showing bug
-$(document).ready(function() {
-	html.refresh();
-	css.refresh();
-	js.refresh();
+// Save editor values
+$('.save').click(function() {
+	localStorage.setItem('currentHtml', html.getValue());
+	localStorage.setItem('currentHead', head.getValue());
+	localStorage.setItem('currentCss', css.getValue());
+	localStorage.setItem('currentJs', js.getValue());
 });
 
 
-// Bring editor to front on click
-maxZ = $('.code-box:last').css('z-index');
-$('.code-box').click(function() {
-	maxZ++;
-	$(this).css('z-index', maxZ);
-});
-
-
-// Update preview
-function updateResult() {
+// Update result
+$('.run').click(function() {
 	var result = document.getElementById('result');
 		result = result.contentWindow || result.contentDocument.document || result.contentDocument;
 	var contents = `
@@ -41,7 +36,7 @@ function updateResult() {
 		<head>
 			<meta charset="UTF-8">
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
-			<script src="https://code.jquery.com/jquery-3.5.1.min.js"></scr`+`ipt>
+			${head.getValue()}
 			<style>${css.getValue()}</style>
 		</head>
 
@@ -54,11 +49,19 @@ function updateResult() {
 	result.document.open();
 	result.document.write(contents);
 	result.document.close();
-}
+});
+
+
+// Bring editor to front on click
+maxZ = $('.code-box:last').css('z-index');
+$('.code-box').click(function() {
+	maxZ++;
+	$(this).css('z-index', maxZ);
+});
 
 
 // Change result size
-$('.result-size-container').click(function() {
+$('.resize-icon-container').click(function() {
 	if ($('#desktop-size').is(':checked')) {
 		$('.result-container').css({
 			'width': '100%',
@@ -102,3 +105,13 @@ function horizontalSplit() {
 		snapOffset: 0,
 	});
 }
+
+
+$('.head-toggle').click(function() {
+	$('.head').show();
+	head.refresh();
+	head.focus();
+});
+$('.save-and-close').click(function() {
+	$('.head').show();
+});

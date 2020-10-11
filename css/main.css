@@ -49,11 +49,12 @@ input[type="radio"] {display: none;}
 }
 
 .logo {
-	font-family: 'Fugaz One', cursive;
-	font-size: 25px;
+	font-family: 'Fugaz One';
+	font-size: 30px;
 	margin-left: 15px;
-	color: #fff6;
-	user-select: none;
+	background: -webkit-linear-gradient(-45deg, #f745b4, #fcb74c);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 }
 
 .button-container {
@@ -64,23 +65,21 @@ input[type="radio"] {display: none;}
 }
 
 .button {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	background: rgb(107, 179, 250);
-	background: linear-gradient(180deg, #53A5FB 0%, rgba(6,125,255,1) 100%);
-	width: 90px;
 	height: 26px;
+	min-width: 90px;
 	font-family: 'San Francisco', sans-serif;
-	font-weight: 500;
+	font-weight: 400;
 	font-size: 16px;
-	padding: 0;
+	padding: 0 15px;
 	margin: 0 4px;
 	color: white;
+	background: rgb(107, 179, 250);
+	background: linear-gradient(180deg, #53A5FB 0%, rgba(6,125,255,1) 100%);
 	border: 0;
-	border-radius: var(--radius);
+	border-radius: 4px;
 	outline: 0;
 	cursor: pointer;
+	box-sizing: border-box;
 }
 .button:active {
 	background: linear-gradient(0deg, #53A5FB 0%, rgba(6, 125, 255, 1) 100%);
@@ -145,6 +144,20 @@ input[type="radio"]:checked + .layout {
 	border-bottom-left-radius: var(--radius);
 	border-bottom-right-radius: var(--radius);
 }
+
+.CodeMirror *::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+	background: transparent;
+}
+
+.CodeMirror *::-webkit-scrollbar-corner {background: transparent;}
+
+.CodeMirror *::-webkit-scrollbar-thumb {
+	background: #fff2;
+	border-radius: 999px;
+}
+.CodeMirror *::-webkit-scrollbar-thumb:hover {background: #fff3;}
 
 
 
@@ -217,7 +230,6 @@ input[type="radio"]:checked + .layout {
 	background: linear-gradient(to top, hsl(300, 3%, 82%), hsl(300, 7%, 91%));
 	border-top-left-radius: var(--radius);
 	border-top-right-radius: var(--radius);
-	padding: 0 12px;
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -226,10 +238,11 @@ input[type="radio"]:checked + .layout {
 	display: flex;
 	justify-content: space-between;
 	min-width: 52px;
+	margin-left: 12px;
 }
 
 .circle {
-	--circle-dimension: 13px;
+	--circle-dimension: 12px;
 	height: var(--circle-dimension);
 	width: var(--circle-dimension);
 	border-radius: 50%;
@@ -247,26 +260,94 @@ input[type="radio"]:checked + .layout {
 
 
 
-/* Sizes */
-.result-size-container {margin-left: auto;}
+/* toggles */
+.resize-toggle-container {
+	--resize-dimension: 28px;
+	margin-left: auto;
+	margin-right: calc((var(--tab-height) - var(--resize-dimension))/2);
+}
 
-.icon-label {
+.resize-toggle {
 	float: left;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 28px;
-	width: 30px;
+	height: var(--resize-dimension);
+	width: var(--resize-dimension);
 	font-size: 17px;
 	font-weight: 400;
 	margin: 2px;
 	border-radius: 4px;
-	box-shadow: 0 1px 5px rgba(0, 0, 0, 0.15);
+	box-shadow: 0 0 4px rgba(0,0,0,0.15);
 	color: black;
 	background: white;
 	cursor: pointer;
 }
-input[type="radio"]:checked + .icon-label {
-	background-color: grey;
+
+.head-toggle {
+	--toggle-height: 24px;
+	height: var(--toggle-height);
+	font-family: 'Fira Code', monospace;
+	font-size: 13px;
+	font-weight: 500;
+	padding: 0 8px;
+	margin-left: auto;
+	margin-right: calc((var(--tab-height) - var(--toggle-height))/2);
+	border: 0;
+	border-radius: 4px;
+	outline: 0;
+	box-shadow: 0 0 4px rgba(0,0,0,0.15);
+	color: #666;
+	background: white;
+	box-sizing: border-box;
+	cursor: pointer;
+}
+
+input[type="radio"]:checked + .resize-toggle, .resize-toggle:active, .head-toggle:active {
 	color: white;
+	background-color: #888;
+}
+
+
+
+/* Head */
+.head {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	display: none;
+	width: 550px;
+	background: #eee;
+	border-radius: var(--radius);
+	box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	transform: translate(-50%, -50%);
+	z-index: 9999;
+}
+
+.head-content {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	padding: 20px;
+	border-bottom-left-radius: var(--radius);
+	border-bottom-right-radius: var(--radius);
+	box-sizing: border-box;
+}
+
+.head .CodeMirror {
+	height: 150px;
+	font-size: 12px;
+	border-radius: 2px;
+	border: 1px solid #aaa;
+	box-sizing: border-box;
+}
+
+.head .CodeMirror *::-webkit-scrollbar-thumb {background: #0002;}
+.head .CodeMirror *::-webkit-scrollbar-thumb:hover {background: #0003;}
+
+.save-and-close {
+	margin: 0;
+	margin-left: auto;
+	margin-top: 10px;
 }
