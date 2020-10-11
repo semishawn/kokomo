@@ -49,8 +49,9 @@ input[type="radio"] {display: none;}
 }
 
 .logo {
-	font-family: 'Fugaz One';
+	font-family: 'Fira Sans', sans-serif;
 	font-size: 30px;
+	font-weight: italic;
 	margin-left: 15px;
 	background: -webkit-linear-gradient(-45deg, #f745b4, #fcb74c);
 	-webkit-background-clip: text;
@@ -68,7 +69,7 @@ input[type="radio"] {display: none;}
 	height: 26px;
 	min-width: 90px;
 	font-family: 'San Francisco', sans-serif;
-	font-weight: 400;
+	font-weight: 500;
 	font-size: 16px;
 	padding: 0 15px;
 	margin: 0 4px;
@@ -242,10 +243,10 @@ input[type="radio"]:checked + .layout {
 }
 
 .circle {
-	--circle-dimension: 12px;
+	--circle-dimension: 13px;
 	height: var(--circle-dimension);
 	width: var(--circle-dimension);
-	border-radius: 50%;
+	border-radius: 999px;
 }
 .circle:nth-child(1) {background-color: #F75F5A;}
 .circle:nth-child(2) {background-color: #FABC43;}
@@ -260,7 +261,7 @@ input[type="radio"]:checked + .layout {
 
 
 
-/* toggles */
+/* Toggles */
 .resize-toggle-container {
 	--resize-dimension: 28px;
 	margin-left: auto;
@@ -276,7 +277,7 @@ input[type="radio"]:checked + .layout {
 	width: var(--resize-dimension);
 	font-size: 17px;
 	font-weight: 400;
-	margin: 2px;
+	margin-left: 4px;
 	border-radius: 4px;
 	box-shadow: 0 0 4px rgba(0,0,0,0.15);
 	color: black;
@@ -317,9 +318,9 @@ input[type="radio"]:checked + .resize-toggle, .resize-toggle:active, .head-toggl
 	left: 50%;
 	display: none;
 	width: 550px;
-	background: #eee;
+	background: #f8f8f8;
 	border-radius: var(--radius);
-	box-shadow: 0 0 20px rgba(0,0,0,0.5);
+	box-shadow: 0 0 20px rgba(0,0,0,0.4);
 	transform: translate(-50%, -50%);
 	z-index: 9999;
 }

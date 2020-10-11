@@ -113,5 +113,5 @@ $('.head-toggle').click(function() {
 	head.focus();
 });
 $('.save-and-close').click(function() {
-	$('.head').show();
+	$('.head').hide();
 });
