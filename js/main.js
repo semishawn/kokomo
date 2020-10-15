@@ -9,20 +9,20 @@ $(document).ready(function() {
 	$('body').css('background', `linear-gradient(90deg, ${randhex()}, ${randhex()})`);
 	$('head').append(`<style>body:before{background: linear-gradient(90deg, ${randhex()}, ${randhex()});}</style>`);
 
-	html.setValue(localStorage.getItem('currentHtml'));
+	/* html.setValue(localStorage.getItem('currentHtml'));
 	head.setValue(localStorage.getItem('currentHead'));
 	css.setValue(localStorage.getItem('currentCss'));
-	js.setValue(localStorage.getItem('currentJs'));
+	js.setValue(localStorage.getItem('currentJs')); */
 });
 
 
 // Save editor values
-$('.save').click(function() {
+/* $('.save').click(function() {
 	localStorage.setItem('currentHtml', html.getValue());
 	localStorage.setItem('currentHead', head.getValue());
 	localStorage.setItem('currentCss', css.getValue());
 	localStorage.setItem('currentJs', js.getValue());
-});
+}); */
 
 
 // Update result
@@ -61,14 +61,14 @@ $('.code-box').click(function() {
 
 
 // Change result size
-$('.resize-icon-container').click(function() {
-	if ($('#desktop-size').is(':checked')) {
+$('input[type="radio"][name="result-size"]').change(function() {
+	if ($(this).is('#desktop-size')) {
 		$('.result-container').css({
 			'width': '100%',
 			'max-height': '100%'
 		});
 	};
-	if ($('#mobile-size').is(':checked')) {
+	if ($(this).is('#mobile-size')) {
 		$('.result-container').css({
 			'width': '2.79in',
 			'max-height': '5.65in'

@@ -48,7 +48,6 @@ var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 
 var head = CodeMirror.fromTextArea(document.getElementById('head'), {
 	mode: 'htmlmixed',
-	lineWrapping: true,
 	lineNumbers: true,
 	matchBrackets: true,
 	autoCloseBrackets: true,
