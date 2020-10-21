@@ -34,8 +34,6 @@ $('.run').click(function() {
 		<html>
 
 		<head>
-			<meta charset="UTF-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			${head.getValue()}
 			<style>${css.getValue()}</style>
 		</head>
@@ -84,9 +82,9 @@ Split(['.code-half', '.result-half'], {
 });
 
 
-// Switch editor layouts
-$('.layout-select').click(function() {
-	$('.layout-options').toggleClass('flex');
+// Settings
+$('.settings-select').click(function() {
+	$('.settings-dropdown').toggleClass('flex');
 });
 $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#layers-layout')) $('.code-container').attr('class', 'code-container layers');
@@ -94,24 +92,46 @@ $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#boxes-layout')) $('.code-container').attr('class', 'code-container boxes');
 	if ($(this).is('#tabs-layout')) $('.code-container').attr('class', 'code-container tabs');
 });
-
-
-// layout switch function
-function horizontalSplit() {
-	Split(['.js', '.css', '.html'], {
-		direction: 'vertical',
-		sizes: [100/3, 100/3, 100/3],
-		minSize: 100,
-		snapOffset: 0,
-	});
-}
-
-
-$('.head-toggle').click(function() {
-	$('.head').show();
-	head.refresh();
-	head.focus();
+/* $(document).click(function(event) {
+	var $target = $(event.target);
+	if (!$target.closest('.layout-select').length) {
+		if (!$target.closest('.layout-options').length && $('.layout-options').hasClass('flex')) {
+			$('.layout-options').removeClass('flex');
+		}
+	}
+}); */
+$('#line-wrapping').change(function() {
+	if (!$(this).is(':checked')) {
+		html.setOption('lineWrapping', false);
+		css.setOption('lineWrapping', false);
+		js.setOption('lineWrapping', false);
+	}
+	else {
+		html.setOption('lineWrapping', true);
+		css.setOption('lineWrapping', true);
+		js.setOption('lineWrapping', true);
+	}
 });
-$('.save-and-close').click(function() {
-	$('.head').hide();
+$('#line-numbers').change(function() {
+	if (!$(this).is(':checked')) {
+		html.setOption('lineNumbers', false);
+		css.setOption('lineNumbers', false);
+		js.setOption('lineNumbers', false);
+	}
+	else {
+		html.setOption('lineNumbers', true);
+		css.setOption('lineNumbers', true);
+		js.setOption('lineNumbers', true);
+	}
+});
+
+
+// Show/hide settings
+$('.config-button').click(function() {
+	$('.html-config').toggle();
+	head.refresh();
+});
+
+$('.save-close').click(function() {
+	$('.html-config').hide();
 });

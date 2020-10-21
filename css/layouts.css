@@ -7,19 +7,17 @@
 
 .layers .code-box {
 	position: absolute;
-	height: calc(100% - 2*var(--tab-height) + 10px);
-	width: calc(100% - 2*var(--tab-height) + 10px);
+	height: calc(100% - 2*var(--tab-height) + 8px);
+	width: calc(100% - 2*var(--tab-height) + 8px);
+	z-index: 1;
+}
+.layers .html {
+	bottom: 0;
+	left: 0;
 }
 .layers .js {
 	top: 0;
 	right: 0;
-	z-index: 1;
-}
-.layers .css {z-index: 1;}
-.layers .html {
-	bottom: 0;
-	left: 0;
-	z-index: 1;
 }
 
 
@@ -48,11 +46,10 @@
 
 /* Boxes */
 .boxes .code-box {position: absolute;}
-.boxes .js {
-	bottom: 0;
-	right: 0;
+.boxes .html {
+	top: 0;
 	height: calc(50% - (var(--code-box-margin)/2));
-	width: calc(50% - (var(--code-box-margin)/2));
+	width: 100%;
 }
 .boxes .css {
 	bottom: 0;
@@ -60,10 +57,11 @@
 	height: calc(50% - (var(--code-box-margin)/2));
 	width: calc(50% - (var(--code-box-margin)/2));
 }
-.boxes .html {
-	top: 0;
+.boxes .js {
+	bottom: 0;
+	right: 0;
 	height: calc(50% - (var(--code-box-margin)/2));
-	width: 100%;
+	width: calc(50% - (var(--code-box-margin)/2));
 }
 
 

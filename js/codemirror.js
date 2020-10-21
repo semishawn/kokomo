@@ -48,6 +48,7 @@ var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 
 var head = CodeMirror.fromTextArea(document.getElementById('head'), {
 	mode: 'htmlmixed',
+	theme: 'semi',
 	lineNumbers: true,
 	matchBrackets: true,
 	autoCloseBrackets: true,
@@ -60,7 +61,6 @@ emmetCodeMirror(head, {
 	'Tab': 'emmet.expand_abbreviation_with_tab',
 	'Cmd-Alt-B': 'emmet.balance_outward'
 });
-head.setCursor({line: 2});
 
 
 

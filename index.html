@@ -10,7 +10,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
 	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="css/fonts.css">
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 	<!--Codemirror-->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
@@ -32,6 +32,7 @@
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/layouts.css">
 	<link rel="stylesheet" href="css/layout-icons.css">
+	<link rel="stylesheet" href="css/settings.css">
 	<link rel="stylesheet" href="css/animations.css">
 </head>
 
@@ -44,26 +45,43 @@
 			<button class="button save">Save</button>
 		</div>
 
-		<div class="layout-container">
-			<button class="layout-select">Editor Layout</button>
-			<div class="layout-options">
-				<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
-				<label class="layout" for="layers-layout">
-					<span class="layout-icon layers-icon"><span></span><span></span><span></span></span>
-					Layers
-				</label>
+		<div class="settings">
+			<button class="settings-select">Settings</button>
+			<div class="settings-dropdown">
+				<div class="options layout-options">
+					<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
+					<label class="layout" for="layers-layout">
+						<span class="layout-icon layers-icon"><span></span><span></span><span></span></span>
+						Layers
+					</label>
 
-				<input type="radio" name="layout" id="stack-layout" autocomplete="off">
-				<label class="layout" for="stack-layout">
-					<span class="layout-icon stack-icon"><span></span><span></span><span></span></span>
-					Stack
-				</label>
+					<input type="radio" name="layout" id="stack-layout" autocomplete="off">
+					<label class="layout" for="stack-layout">
+						<span class="layout-icon stack-icon"><span></span><span></span><span></span></span>
+						Stack
+					</label>
 
-				<input type="radio" name="layout" id="boxes-layout" autocomplete="off">
-				<label class="layout" for="boxes-layout">
-					<span class="layout-icon boxes-icon"><span></span><span></span><span></span></span>
-					Boxes
-				</label>
+					<input type="radio" name="layout" id="boxes-layout" autocomplete="off">
+					<label class="layout" for="boxes-layout">
+						<span class="layout-icon boxes-icon"><span></span><span></span><span></span></span>
+						Boxes
+					</label>
+				</div>
+
+				<div class="separator"></div>
+
+				<div class="options editor-options">
+					<div class="editor-toggle">
+						<input id="line-wrapping" type="checkbox" autocomplete="off" checked>
+						<label class="flip-button" for="line-wrapping" data-yes="Yeah" data-no="Nope"></label>
+						<span>Line Wrapping</span>
+					</div>
+					<div class="editor-toggle">
+						<input id="line-numbers" type="checkbox" autocomplete="off" checked>
+						<label class="flip-button" for="line-numbers" data-yes="Yeah" data-no="Nope"></label>
+						<span>Line Numbers</span>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -74,11 +92,7 @@
 				<!--JS-->
 				<div class="code-box js">
 					<div class="tab">
-						<div class="circle-container">
-							<div class="circle"></div>
-							<div class="circle"></div>
-							<div class="circle"></div>
-						</div>
+						<img src="icons/js.svg">
 						<span class="tab-title">Javascript</span>
 					</div>
 					<textarea id="js-editor"></textarea>
@@ -87,11 +101,7 @@
 				<!--CSS-->
 				<div class="code-box css">
 					<div class="tab">
-						<div class="circle-container">
-							<div class="circle"></div>
-							<div class="circle"></div>
-							<div class="circle"></div>
-						</div>
+						<img src="icons/css.svg">
 						<span class="tab-title">CSS</span>
 					</div>
 					<textarea id="css-editor"></textarea>
@@ -100,13 +110,9 @@
 				<!--HTML-->
 				<div class="code-box html">
 					<div class="tab">
-						<div class="circle-container">
-							<div class="circle"></div>
-							<div class="circle"></div>
-							<div class="circle"></div>
-						</div>
+						<img src="icons/html.svg">
 						<span class="tab-title">HTML</span>
-						<button class="head-toggle">&lt;head&gt;</button>
+						<button class="config-button"><img src="icons/gear.svg"></button>
 					</div>
 					<textarea id="html-editor"></textarea>
 				</div>
@@ -117,22 +123,13 @@
 		<div class="half result-half">
 			<div class="result-container">
 				<div class="tab">
-					<div class="circle-container">
-						<div class="circle"></div>
-						<div class="circle"></div>
-						<div class="circle"></div>
-					</div>
-					<span class="tab-title">Result</span>
+					<span class="tab-title no-icon-title">Result</span>
 					<div class="resize-toggle-container">
 						<input type="radio" name="result-size" id="desktop-size" autocomplete="off" checked>
-						<label class="resize-toggle" for="desktop-size">
-							<i class="fas fa-expand-arrows-alt"></i>
-						</label>
+						<label class="resize-toggle" for="desktop-size"><img src="icons/expand.svg"></label>
 
 						<input type="radio" name="result-size" id="mobile-size" autocomplete="off">
-						<label class="resize-toggle" for="mobile-size">
-							<i class="fas fa-mobile-alt"></i>
-						</label>
+						<label class="resize-toggle" for="mobile-size"><img src="icons/mobile.svg"></label>
 					</div>
 				</div>
 				<iframe class="result" id="result"></iframe>
@@ -140,19 +137,17 @@
 		</div>
 	</div>
 
-	<!--Head-->
-	<div class="head">
+	<!--HTML Configuration-->
+	<div class="html-config">
 		<div class="tab">
-			<div class="circle-container">
-				<div class="circle"></div>
-				<div class="circle"></div>
-				<div class="circle"></div>
-			</div>
-			<span class="tab-title">Inside Head Tag</span>
+			<span class="tab-title no-icon-title">HTML Configuration</span>
 		</div>
-		<div class="head-content">
-			<textarea id="head"><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>&#10;</textarea>
-			<button class="button save-and-close">Save and Close</button>
+		<div class="config-content">
+			<span>Inside <span>&lt;head&gt;</span></span>
+			<textarea id="head"><meta charset="UTF-8">&#10;<meta name="viewport" content="width=device-width, initial-scale=1"/>&#10;<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>&#10;</textarea>
+		</div>
+		<div class="config-bottom">
+			<button class="button save-close">Save & Close</button>
 		</div>
 	</div>
 
