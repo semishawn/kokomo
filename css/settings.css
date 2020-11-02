@@ -1,19 +1,4 @@
-.settings {
-	position: relative;
-}
-
-.settings-select {
-	height: 35px;
-	font-size: 15px;
-	padding: 0 12px;
-	color: white;
-	background: transparent;
-	border: 2px solid #fff4;
-	border-radius: var(--main-radius);
-	cursor: pointer;
-	box-sizing: border-box;
-}
-.settings-select:hover {background: #fff1;}
+.settings {position: relative;}
 
 .settings-dropdown {
 	position: absolute;
@@ -26,12 +11,11 @@
 	background: white;
 	border-radius: var(--main-radius);
 	box-shadow: 0 0 25px rgba(0,0,0,0.3);
+	z-index: 9999;
 }
 .flex {display: flex;}
 
-.options {
-	display: flex;
-}
+.options {display: flex;}
 
 .separator {
 	height: 2px;
@@ -59,7 +43,7 @@ input[type="radio"]:checked + .layout {
 .editor-toggle {
 	display: flex;
 	align-items: center;
-	width: 180px;
+	width: 190px;
 }
 
 .flip-button {

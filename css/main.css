@@ -1,11 +1,10 @@
 :root {
-	--nav-height: 50px;
+	--nav-height: 52px;
 	--tab-height: 38px;
 	--main-radius: 5px;
 	--small-radius: 4px;
-	--padding: 30px;
 	--code-box-margin: 10px;
-	--tab-button-dimension: 26px;
+	--small-button-dimension: 26px;
 }
 
 
@@ -51,20 +50,16 @@ button {
 	width: 100%;
 	font-size: 16px;
 	padding: 0 10px;
-	background-color: #1F2430;
+	background-color: var(--nav);
 	box-sizing: border-box;
 	z-index: 9999;
 }
 
 .logo {
-	font-family: 'Fira Sans', sans-serif;
-	font-size: 30px;
-	font-weight: 800;
-	font-style: italic;
-	background: -webkit-linear-gradient(-45deg, #f745b4, #fcb74c);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
+	height: 35px;
+	transition: all 0.25s;
 }
+.logo:hover {transform: rotate(-30deg);}
 
 .button-container {
 	position: absolute;
@@ -74,20 +69,44 @@ button {
 }
 
 .button {
-	height: 26px;
-	min-width: 90px;
+	position: relative;
+	height: 38px;
+	min-width: 105px;
+	font-family: 'IBM Plex Mono', monospace;
 	font-size: 15px;
-	padding: 0 15px;
-	margin: 0 4px;
-	color: white;
-	background: rgb(107, 179, 250);
-	background: linear-gradient(180deg, #53A5FB 0%, rgba(6,125,255,1) 100%);
-	border: 0;
-	border-radius: var(--small-radius);
+	font-weight: 400;
+	font-style: italic;
+	padding: 0 18px;
+	border: 1.5px dashed var(--button-static);
+	color: var(--button-static);
+	background: transparent;
+	transition: all 0.4s;
 	cursor: pointer;
 	box-sizing: border-box;
 }
-.button:active {background: linear-gradient(0deg, #53A5FB 0%, rgba(6, 125, 255, 1) 100%);}
+.button i {margin-right: 6px;}
+.button + .button {margin-left: 8px;}
+.button:before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background-color: var(--button-hover);
+	transform-origin: bottom right;
+	transform: scaleX(0);
+	transition: transform 0.4s;
+}
+.button:hover {
+	border-style: solid;
+	border-color: var(--button-hover);
+	color: var(--button-hover);
+}
+.button:hover:before {
+	transform-origin: bottom left;
+	transform: scaleX(1);
+}
 
 
 
@@ -96,8 +115,7 @@ button {
 	height: calc(100% - var(--tab-height));
 	font-family: 'Fira Code', monospace;
 	font-size: 14px;
-	border-bottom-left-radius: var(--main-radius);
-	border-bottom-right-radius: var(--main-radius);
+	scrollbar-color: #fff2 transparent;
 }
 
 .CodeMirror *::-webkit-scrollbar {
@@ -124,14 +142,14 @@ button {
 }
 
 .half {
-	height: 100%;
+	float: left;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	box-sizing: border-box;
-	padding: var(--padding);
-	float: left;
+	height: 100%;
+	padding: 30px;
 	overflow: hidden;
+	box-sizing: border-box;
 }
 
 .gutter-horizontal {
@@ -151,22 +169,27 @@ button {
 .code-box {
 	border-radius: var(--main-radius);
 	box-shadow: 0 0 25px rgba(0,0,0,0.3);
+	overflow: hidden;
 }
 
 .result-container {
 	height: 100%;
+	max-height: 100%;
 	width: 100%;
 	border-radius: var(--main-radius);
 	box-shadow: 0 0 25px rgba(0,0,0,0.3);
 	transition: all 0.5s;
+	overflow: hidden;
+}
+.mobile-result {
+	width: 2.79in;
+	max-height: 5.65in;
 }
 
 .result {
 	height: calc(100% - var(--tab-height));
 	width: 100%;
 	border: none;
-	border-bottom-left-radius: var(--main-radius);
-	border-bottom-right-radius: var(--main-radius);
 	background-color: white;
 }
 
@@ -179,10 +202,7 @@ button {
 	height: var(--tab-height);
 	width: 100%;
 	color: grey;
-	background: hsl(300, 1%, 81%);
-	background: linear-gradient(to top, hsl(300, 3%, 82%), hsl(300, 7%, 91%));
-	border-top-left-radius: var(--main-radius);
-	border-top-right-radius: var(--main-radius);
+	background: linear-gradient(to top, #d2d2d2, #eaeaea);
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -190,7 +210,7 @@ button {
 .tab > img {
 	height: 20px;
 	margin: 0 8px;
-	user-select: none;
+	pointer-events: none;
 }
 
 .tab-title {
@@ -203,28 +223,27 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--tab-button-dimension);
-	width: var(--tab-button-dimension);
-	font-size: 17px;
+	height: var(--small-button-dimension);
+	width: var(--small-button-dimension);
+	font-size: 16px;
 	padding: 0;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--tab-button-dimension))/2);
+	margin-right: calc((var(--tab-height) - var(--small-button-dimension))/2);
 	border: 0;
 	border-radius: var(--small-radius);
 	box-shadow: 0 0 4px rgba(0,0,0,0.15);
 	background: white;
 	cursor: pointer;
 }
-.config-button > img {
-	height: 15px;
-	user-select: none;
+.config-button:active {
+	color: white;
+	background: #888;
 }
-.config-button:active > img {filter: invert();}
 
 .resize-toggle-container {
 	display: flex;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--tab-button-dimension))/2);
+	margin-right: calc((var(--tab-height) - var(--small-button-dimension))/2);
 	border-radius: var(--small-radius);
 	box-shadow: 0 0 4px rgba(0,0,0,0.15);
 	overflow: hidden;
@@ -234,25 +253,18 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--tab-button-dimension);
-	width: calc(var(--tab-button-dimension) + 2px);
-	font-size: 17px;
+	height: var(--small-button-dimension);
+	width: calc(var(--small-button-dimension) + 2px);
+	padding: 0;
 	border: 0;
-	color: black;
 	background: white;
 	cursor: pointer;
 }
-
 .resize-toggle > img {
 	height: 18px;
 	user-select: none;
 }
-
-.config-button:active {
-	color: white;
-	background-color: #888;
-}
-input[type="radio"]:checked + .resize-toggle, .tab-button:active {background-color: #888;}
+input[type="radio"]:checked + .resize-toggle {background-color: #888;}
 input[type="radio"]:checked + .resize-toggle > img {filter: invert();}
 
 
@@ -263,12 +275,13 @@ input[type="radio"]:checked + .resize-toggle > img {filter: invert();}
 	top: 50%;
 	left: 50%;
 	display: none;
-	width: 550px;
+	width: 600px;
 	background: #f8f8f8;
 	border-radius: var(--main-radius);
 	box-shadow: 0 0 20px rgba(0,0,0,0.4);
 	transform: translate(-50%, -50%);
-	z-index: 9999;
+	overflow: hidden;
+	z-index: 9998;
 }
 
 .config-content {
@@ -277,32 +290,54 @@ input[type="radio"]:checked + .resize-toggle > img {filter: invert();}
 	height: 100%;
 	width: 100%;
 	padding: 20px;
-	background: #777;
+	background: #252830;
 	box-sizing: border-box;
 }
 
 .config-content > span {
-	font-size: 15px;
+	font-size: 14px;
 	font-weight: 400;
-	margin-bottom: 5px;
-	color: white;
-}
-
-.config-bottom {
-	display: flex;
-	align-items: center;
-	height: 50px;
-	width: 100%;
+	margin-bottom: 3px;
+	color: #ddd;
 }
 
 .html-config .CodeMirror {
-	height: 100px;
+	height: 120px;
 	font-size: 12px;
 	border-radius: var(--small-radius);
 	box-sizing: border-box;
 }
 
+.preset-container {
+	display: flex;
+	align-items: center;
+	margin-top: 7px;
+}
+
+.head-preset {
+	float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--small-button-dimension);
+	font-size: 13px;
+	padding: 0 10px;
+	margin-right: 7px;
+	border: 0;
+	border-radius: var(--small-radius);
+	color: #bbb;
+	background: #444;
+	box-shadow: 0 0 4px rgba(0,0,0,0.15);
+	cursor: pointer;
+}
+.head-preset i {
+	font-size: 12px;
+	margin-right: 5px;
+}
+.head-preset:active {filter: brightness(80%);}
+
 .save-close {
 	margin: 0;
+	margin-top: 20px;
 	margin-left: auto;
 }

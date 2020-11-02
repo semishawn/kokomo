@@ -2,17 +2,17 @@
 <html>
 
 <head>
+	<!-- Meta -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Kokomo</title>
-	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
-	<script src="https://kit.fontawesome.com/5978d27576.js" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
-	<link href="https://fonts.googleapis.com/css2?family=Fira+Sans:ital,wght@1,800&display=swap" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-	<!--Codemirror-->
+	<!-- Fonts -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
+	<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+
+	<!-- Codemirror -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/xml/xml.js"></script>
@@ -28,25 +28,31 @@
 	<script src="https://cdn.jsdelivr.net/npm/emmet-codemirror@1.2.5/dist/emmet.min.js"></script>
 	<link rel="stylesheet" href="css/semi.css">
 
-	<!--My Styles-->
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/colors.css">
 	<link rel="stylesheet" href="css/main.css">
 	<link rel="stylesheet" href="css/layouts.css">
 	<link rel="stylesheet" href="css/layout-icons.css">
 	<link rel="stylesheet" href="css/settings.css">
 	<link rel="stylesheet" href="css/animations.css">
+
+	<!-- Plugins -->
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+	<script src="https://kit.fontawesome.com/5978d27576.js" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
 </head>
 
 <body>
 	<div class="nav">
-		<div class="logo">Kokomo</div>
+		<img class="logo" src="icons/logo.svg">
 
 		<div class="button-container">
-			<button class="button run">Run</button>
-			<button class="button save">Save</button>
+			<button class="button run"><i class="fas fa-running"></i>Run</button>
+			<button class="button save"><i class="far fa-save"></i>Save</button>
 		</div>
 
 		<div class="settings">
-			<button class="settings-select">Settings</button>
+			<button class="button settings-select"><i class="fas fa-cog"></i>Settings</button>
 			<div class="settings-dropdown">
 				<div class="options layout-options">
 					<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
@@ -89,39 +95,39 @@
 	<div class="editor">
 		<div class="half code-half">
 			<div class="code-container layers">
-				<!--JS-->
+				<!-- JS -->
 				<div class="code-box js">
 					<div class="tab">
-						<img src="icons/js.svg">
+						<img src="icons/languages/js.svg">
 						<span class="tab-title">Javascript</span>
 					</div>
 					<textarea id="js-editor"></textarea>
 				</div>
 
-				<!--CSS-->
+				<!-- CSS -->
 				<div class="code-box css">
 					<div class="tab">
-						<img src="icons/css.svg">
+						<img src="icons/languages/css.svg">
 						<span class="tab-title">CSS</span>
 					</div>
 					<textarea id="css-editor"></textarea>
 				</div>
 
-				<!--HTML-->
+				<!-- HTML -->
 				<div class="code-box html">
 					<div class="tab">
-						<img src="icons/html.svg">
+						<img src="icons/languages/html.svg">
 						<span class="tab-title">HTML</span>
-						<button class="config-button"><img src="icons/gear.svg"></button>
+						<button class="config-button"><i class="fas fa-tools"></i></button>
 					</div>
 					<textarea id="html-editor"></textarea>
 				</div>
 			</div>
 		</div>
 
-		<!--Result-->
+		<!-- Result -->
 		<div class="half result-half">
-			<div class="result-container">
+			<div class="result-container desktop-result">
 				<div class="tab">
 					<span class="tab-title no-icon-title">Result</span>
 					<div class="resize-toggle-container">
@@ -137,16 +143,26 @@
 		</div>
 	</div>
 
-	<!--HTML Configuration-->
+	<!-- HTML Configuration -->
 	<div class="html-config">
 		<div class="tab">
 			<span class="tab-title no-icon-title">HTML Configuration</span>
 		</div>
 		<div class="config-content">
 			<span>Inside <span>&lt;head&gt;</span></span>
-			<textarea id="head"><meta charset="UTF-8">&#10;<meta name="viewport" content="width=device-width, initial-scale=1"/>&#10;<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>&#10;</textarea>
-		</div>
-		<div class="config-bottom">
+			<textarea id="head"><meta charset="UTF-8">&#10;<meta name="viewport" content="width=device-width, initial-scale=1">&#10;</textarea>
+
+			<div class="preset-container metadata-presets">
+				<button class="head-preset" id="charset-preset"><i class="fas fa-plus"></i>Common charset</button>
+				<button class="head-preset" id="viewport-preset"><i class="fas fa-plus"></i>Common viewport</button>
+			</div>
+			<div class="preset-container plugin-presets">
+				<button class="head-preset" id="jquery-preset"><i class="fas fa-plus"></i>jQuery</button>
+				<button class="head-preset" id="react-preset"><i class="fas fa-plus"></i>React</button>
+				<button class="head-preset" id="angular-preset"><i class="fas fa-plus"></i>Angular</button>
+				<button class="head-preset" id="vue-preset"><i class="fas fa-plus"></i>Vue</button>
+			</div>
+
 			<button class="button save-close">Save & Close</button>
 		</div>
 	</div>

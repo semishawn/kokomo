@@ -60,18 +60,8 @@ $('.code-box').click(function() {
 
 // Change result size
 $('input[type="radio"][name="result-size"]').change(function() {
-	if ($(this).is('#desktop-size')) {
-		$('.result-container').css({
-			'width': '100%',
-			'max-height': '100%'
-		});
-	};
-	if ($(this).is('#mobile-size')) {
-		$('.result-container').css({
-			'width': '2.79in',
-			'max-height': '5.65in'
-		});
-	};
+	if ($(this).is('#mobile-size')) $('.result-container').addClass('mobile-result');
+	if ($(this).is('#desktop-size')) $('.result-container').removeClass('mobile-result');
 });
 
 
@@ -92,14 +82,6 @@ $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#boxes-layout')) $('.code-container').attr('class', 'code-container boxes');
 	if ($(this).is('#tabs-layout')) $('.code-container').attr('class', 'code-container tabs');
 });
-/* $(document).click(function(event) {
-	var $target = $(event.target);
-	if (!$target.closest('.layout-select').length) {
-		if (!$target.closest('.layout-options').length && $('.layout-options').hasClass('flex')) {
-			$('.layout-options').removeClass('flex');
-		}
-	}
-}); */
 $('#line-wrapping').change(function() {
 	if (!$(this).is(':checked')) {
 		html.setOption('lineWrapping', false);
@@ -126,12 +108,33 @@ $('#line-numbers').change(function() {
 });
 
 
-// Show/hide settings
+// Show/hide html config
 $('.config-button').click(function() {
 	$('.html-config').toggle();
 	head.refresh();
+	head.focus();
+	head.setCursor(head.lineCount(), 0);
 });
 
 $('.save-close').click(function() {
 	$('.html-config').hide();
+});
+
+
+// Head presets
+$('.head-preset').click(function() {
+	if ($(this).is('#charset-preset')) head.setValue(head.getValue() + '<meta charset="UTF-8">\n');
+
+	if ($(this).is('#viewport-preset')) head.setValue(head.getValue() + '<meta name="viewport" content="width=device-width, initial-scale=1">\n');
+
+	if ($(this).is('#jquery-preset')) head.setValue(head.getValue() + '<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>\n');
+
+	if ($(this).is('#react-preset')) head.setValue(head.getValue() + '<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js"></script>\n');
+
+	if ($(this).is('#angular-preset')) head.setValue(head.getValue() + '<script src="https://cdnjs.cloudflare.com/ajax/libs/angular/10.2.1/core.umd.min.js"></script>\n');
+
+	if ($(this).is('#vue-preset')) head.setValue(head.getValue() + '<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>\n');
+
+	head.focus();
+	head.setCursor(head.lineCount(), 0);
 });

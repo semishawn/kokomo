@@ -5,6 +5,8 @@
 	align-items: center;
 }
 
+.layers .tab {cursor: grab;}
+
 .layers .code-box {
 	position: absolute;
 	height: calc(100% - 2*var(--tab-height) + 8px);
