@@ -5,7 +5,7 @@
 	<!-- Meta -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kokomo</title>
+	<title>Web Editor - Kokomo</title>
 
 	<!-- Fonts -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
@@ -26,15 +26,15 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/edit/matchtags.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/scroll/scrollpastend.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/emmet-codemirror@1.2.5/dist/emmet.min.js"></script>
-	<link rel="stylesheet" href="css/semi.css">
+	<link rel="stylesheet" href="css/kokomo-syntax.css">
 
 	<!-- CSS -->
 	<link rel="stylesheet" href="css/colors.css">
 	<link rel="stylesheet" href="css/main.css">
-	<link rel="stylesheet" href="css/layouts.css">
-	<link rel="stylesheet" href="css/layout-icons.css">
-	<link rel="stylesheet" href="css/settings.css">
 	<link rel="stylesheet" href="css/animations.css">
+	<link rel="stylesheet" href="css/settings.css">
+	<link rel="stylesheet" href="css/tri-editor/specifics.css">
+	<link rel="stylesheet" href="css/tri-editor/layouts.css">
 
 	<!-- Plugins -->
 	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
@@ -46,13 +46,13 @@
 	<div class="nav">
 		<img class="logo" src="icons/logo.svg">
 
-		<div class="button-container">
-			<button class="button run"><i class="fas fa-running"></i>Run</button>
-			<button class="button save"><i class="far fa-save"></i>Save</button>
+		<div class="primary-functions-container">
+			<button class="funky-button run"><i class="fas fa-running"></i>Run</button>
+			<button class="funky-button save"><i class="far fa-save"></i>Save</button>
 		</div>
 
 		<div class="settings">
-			<button class="button settings-select"><i class="fas fa-cog"></i>Settings</button>
+			<button class="funky-button settings-select"><i class="fas fa-cog"></i>Settings</button>
 			<div class="settings-dropdown">
 				<div class="options layout-options">
 					<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
@@ -92,14 +92,18 @@
 		</div>
 	</div>
 
-	<div class="editor">
+	<div class="editor tri-editor">
 		<div class="half code-half">
+
+			<div class="box-cycler"><i class="fas fa-sync-alt"></i>Cycle Editors</div>
+
 			<div class="code-container layers">
 				<!-- JS -->
 				<div class="code-box js">
 					<div class="tab">
-						<img src="icons/languages/js.svg">
+						<img class="lang-icon" src="icons/languages/js.svg">
 						<span class="tab-title">Javascript</span>
+						<button class="config-button"><i class="fas fa-tools"></i></button>
 					</div>
 					<textarea id="js-editor"></textarea>
 				</div>
@@ -107,7 +111,7 @@
 				<!-- CSS -->
 				<div class="code-box css">
 					<div class="tab">
-						<img src="icons/languages/css.svg">
+						<img class="lang-icon" src="icons/languages/css.svg">
 						<span class="tab-title">CSS</span>
 					</div>
 					<textarea id="css-editor"></textarea>
@@ -116,7 +120,7 @@
 				<!-- HTML -->
 				<div class="code-box html">
 					<div class="tab">
-						<img src="icons/languages/html.svg">
+						<img class="lang-icon" src="icons/languages/html.svg">
 						<span class="tab-title">HTML</span>
 						<button class="config-button"><i class="fas fa-tools"></i></button>
 					</div>
@@ -129,13 +133,16 @@
 		<div class="half result-half">
 			<div class="result-container desktop-result">
 				<div class="tab">
-					<span class="tab-title no-icon-title">Result</span>
-					<div class="resize-toggle-container">
-						<input type="radio" name="result-size" id="desktop-size" autocomplete="off" checked>
-						<label class="resize-toggle" for="desktop-size"><img src="icons/expand.svg"></label>
+					<span class="tab-title iconless-tab-title">Result</span>
+					<div class="result-buttons">
+						<a class="export-button disabled" download="KokomoExport.html"><i class="fas fa-download"></i>Export</a>
+						<div class="resize-toggle-container">
+							<input type="radio" name="result-size" id="desktop-size" autocomplete="off" checked>
+							<label class="resize-toggle" for="desktop-size"><i class="fas fa-expand"></i></label>
 
-						<input type="radio" name="result-size" id="mobile-size" autocomplete="off">
-						<label class="resize-toggle" for="mobile-size"><img src="icons/mobile.svg"></label>
+							<input type="radio" name="result-size" id="mobile-size" autocomplete="off">
+							<label class="resize-toggle" for="mobile-size"><i class="fas fa-mobile-alt"></i></label>
+						</div>
 					</div>
 				</div>
 				<iframe class="result" id="result"></iframe>
@@ -143,32 +150,43 @@
 		</div>
 	</div>
 
+	<div class="body-block"></div>
+
 	<!-- HTML Configuration -->
-	<div class="html-config">
+	<div class="config-dialogue html-config">
 		<div class="tab">
-			<span class="tab-title no-icon-title">HTML Configuration</span>
+			<span class="tab-title iconless-tab-title">HTML Configuration</span>
 		</div>
 		<div class="config-content">
-			<span>Inside <span>&lt;head&gt;</span></span>
+			<span>Inside head tag:</span>
 			<textarea id="head"><meta charset="UTF-8">&#10;<meta name="viewport" content="width=device-width, initial-scale=1">&#10;</textarea>
-
 			<div class="preset-container metadata-presets">
-				<button class="head-preset" id="charset-preset"><i class="fas fa-plus"></i>Common charset</button>
-				<button class="head-preset" id="viewport-preset"><i class="fas fa-plus"></i>Common viewport</button>
+				<button class="preset" id="charset-preset"><i class="fas fa-plus"></i>Common charset</button>
+				<button class="preset" id="viewport-preset"><i class="fas fa-plus"></i>Common viewport</button>
 			</div>
-			<div class="preset-container plugin-presets">
-				<button class="head-preset" id="jquery-preset"><i class="fas fa-plus"></i>jQuery</button>
-				<button class="head-preset" id="react-preset"><i class="fas fa-plus"></i>React</button>
-				<button class="head-preset" id="angular-preset"><i class="fas fa-plus"></i>Angular</button>
-				<button class="head-preset" id="vue-preset"><i class="fas fa-plus"></i>Vue</button>
-			</div>
-
-			<button class="button save-close">Save & Close</button>
+			<button class="funky-button save-close">Save & Close</button>
 		</div>
 	</div>
 
-	<script src="js/codemirror.js"></script>
-	<script src="js/main.js"></script>
+	<!-- JS Configuration -->
+	<div class="config-dialogue js-config">
+		<div class="tab">
+			<span class="tab-title iconless-tab-title">Javascript Configuration</span>
+		</div>
+		<div class="config-content">
+			<span>Extra plugins:</span>
+			<textarea id="plugins"></textarea>
+			<div class="preset-container plugin-presets">
+				<button class="preset" id="jquery-preset"><i class="fas fa-plus"></i>jQuery</button>
+				<button class="preset" id="react-preset"><i class="fas fa-plus"></i>React</button>
+				<button class="preset" id="angular-preset"><i class="fas fa-plus"></i>Angular</button>
+				<button class="preset" id="vue-preset"><i class="fas fa-plus"></i>Vue</button>
+			</div>
+			<button class="funky-button save-close">Save & Close</button>
+		</div>
+	</div>
+
+	<script src="js/tri-editor.js"></script>
 </body>
 
 </html>
