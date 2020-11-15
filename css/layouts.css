@@ -1,3 +1,38 @@
+/* General */
+.layout {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: calc(100%/3);
+	padding: 10px 0;
+	border-radius: var(--small-radius);
+	opacity: 0.5;
+	cursor: pointer;
+}
+.layout:hover {opacity: 1;}
+input[name="layout"]:checked + .layout {
+	opacity: 1;
+	background: #eee;
+}
+
+.layout-icon {
+	--a: 34px;
+	--b: calc(var(--a)*0.07);
+	position: relative;
+	height: var(--a);
+	width: var(--a);
+	margin-right: 10px;
+}
+
+.layout-icon span {
+	border: 2px solid black;
+	border-radius: 3px;
+	background: white;
+	box-sizing: border-box;
+}
+
+
+
 /* Gutters */
 :root {--gutter-margin: 5px;}
 .code-container .gutter-horizontal {
@@ -125,6 +160,28 @@
 	top: 0;
 	height: calc(50% - (var(--b)/2));
 	width: 100%;
+}
+
+.box-cycler {
+	position: absolute;
+	top: calc(var(--half-padding) + (var(--tab-height) - var(--small-button-dimension))/2);
+	display: none;
+	align-items: center;
+	height: var(--small-button-dimension);
+	font-size: 13px;
+	padding: 0 10px;
+	border: 0;
+	border-radius: var(--small-radius);
+	box-shadow: var(--small-button-shadow);
+	color: black;
+	background: white;
+	cursor: pointer;
+	user-select: none;
+	z-index: 997;
+}
+.box-cycler svg {
+	font-size: 15px;
+	margin-right: 6px;
 }
 
 

@@ -1,9 +1,9 @@
 // Initialization
 $(document).ready(function() {
-	html.refresh();
+/* 	html.refresh();
 	css.refresh();
 	js.refresh();
-/* 	html.setValue(localStorage.getItem('currentHtml'));
+	html.setValue(localStorage.getItem('currentHtml'));
 	css.setValue(localStorage.getItem('currentCss'));
 	js.setValue(localStorage.getItem('currentJs'));
 	head.setValue(localStorage.getItem('currentHead'));
@@ -12,85 +12,27 @@ $(document).ready(function() {
 
 
 
-// Main editors
-var html = CodeMirror.fromTextArea(document.getElementById('html-editor'), {
-	mode: 'htmlmixed',
-	theme: 'kokomo-syntax',
-	lineWrapping: true,
-	lineNumbers: true,
-	matchBrackets: true,
-	autoCloseBrackets: true,
-	matchTags: {bothTags: true},
-	extraKeys: {'Ctrl-J': 'toMatchingTag'},
-	smartIndent: true,
-	tabSize: 4,
-	indentUnit: 4,
-	indentWithTabs: true,
-	scrollPastEnd: true
-});
-emmetCodeMirror(html, {
-	'Tab': 'emmet.expand_abbreviation_with_tab',
-	'Cmd-Alt-B': 'emmet.balance_outward'
-});
-var css = CodeMirror.fromTextArea(document.getElementById('css-editor'), {
-	mode: 'text/css',
-	theme: 'kokomo-syntax',
-	lineWrapping: true,
-	lineNumbers: true,
-	matchBrackets: true,
-	autoCloseBrackets: true,
-	smartIndent: true,
-	tabSize: 4,
-	indentUnit: 4,
-	indentWithTabs: true,
-	scrollPastEnd: true
-});
-var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
-	mode: 'text/javascript',
-	theme: 'kokomo-syntax',
-	lineWrapping: true,
-	lineNumbers: true,
-	matchBrackets: true,
-	autoCloseBrackets: true,
-	smartIndent: true,
-	tabSize: 4,
-	indentUnit: 4,
-	indentWithTabs: true,
-	scrollPastEnd: true
-});
-
-
-
-// Config dialogues
-var head = CodeMirror.fromTextArea(document.getElementById('head'), {
-	mode: 'htmlmixed',
-	theme: 'kokomo-syntax',
-	lineNumbers: true,
-	matchBrackets: true,
-	autoCloseBrackets: true,
-	smartIndent: true,
-	tabSize: 4,
-	indentUnit: 4,
-	indentWithTabs: true
-});
-var plugins = CodeMirror.fromTextArea(document.getElementById('plugins'), {
-	mode: 'htmlmixed',
-	theme: 'kokomo-syntax',
-	lineNumbers: true,
-	matchBrackets: true,
-	autoCloseBrackets: true,
-	smartIndent: true,
-	tabSize: 4,
-	indentUnit: 4,
-	indentWithTabs: true
-});
-
-
-
 // Draggable slider between halves
 Split(['.code-half', '.result-half'], {
 	minSize: 350,
 	snapOffset: 0
+});
+
+
+
+// General dropdown
+$('.logo').click(() => $('.info-dropdown').toggleClass('show'));
+
+
+
+// Close dropdowns on click
+$(document).click(function(e) {
+	if (!$(e.target).closest('.settings').length) $('.settings-dropdown').removeClass('show');
+	if (!$(e.target).closest('.general').length) $('.info-dropdown').removeClass('show');
+	$('.result').contents().click(function() {
+		$('.info-dropdown').removeClass('show');
+		$('.settings-dropdown').removeClass('show');
+	});
 });
 
 
@@ -105,24 +47,25 @@ $('.run').click(function() {
 			<head>
 				${head.getValue()}
 				<style>
+				body {transform-origin: left top;}
 				${css.getValue()}
 				</style>
 			</head>
 
 			<body>
 				${html.getValue()}
+				${plugins.getValue()}
 				<script>
 				${js.getValue()}
 				</scr`+`ipt>
-				${plugins.getValue()}
 			</body>
 
 			</html>`;
 	result.document.open();
 	result.document.write(meat);
 	result.document.close();
-
 	$('.export-button').removeClass('disabled');
+	zoom();
 });
 
 
@@ -130,11 +73,18 @@ $('.run').click(function() {
 // Save editor values
 $('.save').click(function() {
 	alert('Heads up: Proper saving hasn\'t been implemented yet.');
+
 /* 	localStorage.setItem('currentHtml', html.getValue());
 	localStorage.setItem('currentCss', css.getValue());
 	localStorage.setItem('currentJs', js.getValue());
 	localStorage.setItem('currentHead', head.getValue());
-	localStorage.setItem('currentPlugins', plugins.getValue()); */
+	localStorage.setItem('currentPlugins', plugins.getValue());
+	$('.save').addClass('saved');
+	$('.save svg').attr('class', 'fas fa-check');
+	setTimeout(function() {
+		$('.save').removeClass('saved');
+		$('.save svg').attr('class', 'far fa-save');
+	}, 700); */
 });
 
 
@@ -149,17 +99,23 @@ $('.code-box').click(function() {
 
 
 // Change result size
-$('input[type="radio"][name="result-size"]').change(function() {
+$('input[name="result-size"]').change(function() {
 	if ($(this).is('#mobile-size')) $('.result-container').addClass('mobile-result');
 	else $('.result-container').removeClass('mobile-result');
 });
 
+// Change result zoom
+$('input[name="result-zoom"]').change(function() {zoom()});
+function zoom() {
+	if ($('#100-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(100%)');
+	if ($('#200-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(200%)');
+	if ($('#300-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(300%)');
+}
+
 
 
 // Settings
-$('.settings-select').click(function() {
-	$('.settings-dropdown').toggleClass('settings-show');
-});
+$('.settings-select').click(() => $('.settings-dropdown').toggleClass('show'));
 
 $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#layers-layout')) {
@@ -181,7 +137,7 @@ $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#boxes-layout')) {
 		if ($('.code-container').find('.gutter').length > 0) stackSplit.destroy();
 		$('.code-container').attr('class', 'code-container boxes');
-		$('.box-cycler').css('display', 'flex');
+		$('.box-cycler').addClass('show');
 	}
 });
 
@@ -190,7 +146,7 @@ function notBoxes() {
 	$('.code-container').prepend($('.css'));
 	$('.code-container').prepend($('.js'));
 	$('.code-box').css({'animation': 'none', 'opacity': '1'});
-	$('.box-cycler').css('display', 'none');
+	$('.box-cycler').removeClass('show');
 }
 
 $('.box-cycler').click(function() {
@@ -231,7 +187,7 @@ $('#line-numbers').change(function() {
 
 
 
-// Show/hide html config
+// Show/hide config
 $('.config-button').click(function() {
 	$('.body-block').show();
 	if ($(this).parent().parent().is('.html')) {
@@ -257,18 +213,24 @@ $('.save-close').click(function() {
 
 // Head presets
 $('.preset').click(function() {
-	if ($('.html-config').is(':visible')) {
+	if ($(this).parent().parent().parent().is('.html-config')) {
 		if ($(this).is('#charset-preset')) head.replaceSelection('<meta charset="UTF-8">');
 		if ($(this).is('#viewport-preset')) head.replaceSelection('<meta name="viewport" content="width=device-width, initial-scale=1">');
 		head.focus();
 		head.setCursor(head.lineCount(), 0);
 	}
 
-	if ($('.js-config').is(':visible')) {
+	if ($(this).parent().parent().parent().is('.js-config')) {
 		if ($(this).is('#jquery-preset')) plugins.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>');
 		if ($(this).is('#react-preset')) plugins.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js"></script>');
 		if ($(this).is('#angular-preset')) plugins.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/angular/10.2.1/core.umd.min.js"></script>');
 		if ($(this).is('#vue-preset')) plugins.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"></script>');
+
+		if ($(this).is('#bootstrap-preset')) {
+			plugins.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js"></script>');
+			head.replaceSelection('<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css"></script>');
+		}
+
 		plugins.focus();
 		plugins.setCursor(plugins.lineCount(), 0);
 	}
@@ -278,6 +240,18 @@ $('.preset').click(function() {
 
 // Export file
 $('.export-button').click(function() {
-	var meatBlob = new Blob([meat], {type: 'text/plain'});
+	meatFormatted = meat.replaceAll('\t', '');
+	var meatBlob = new Blob([meatFormatted], {type: 'text/plain'});
 	$(this).attr('href', URL.createObjectURL(meatBlob));
 });
+
+
+
+// Ask before closing if editors were changed
+/* window.addEventListener('beforeunload', function(e) {
+	if (html.getValue() != html.getValue() && css.getValue() != css.getValue() && js.getValue() != js.getValue()) {
+		var confirmationMessage = '\o/';
+		(e || window.event).returnValue = confirmationMessage;
+		return confirmationMessage;
+	}
+}); */

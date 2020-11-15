@@ -13,7 +13,6 @@
 	box-shadow: 0 0 25px rgba(0,0,0,0.3);
 	z-index: 999;
 }
-.settings-show {display: flex;}
 
 .options {display: flex;}
 
@@ -27,7 +26,7 @@
 .editor-toggle {
 	display: flex;
 	align-items: center;
-	width: 190px;
+	width: 200px;
 }
 
 .flip-button {
@@ -84,3 +83,8 @@ input[type="checkbox"]:checked + .flip-button:active:after {transform: rotateY(2
 	margin-left: 8px;
 	white-space: nowrap;
 }
+
+
+
+/* idk why this has to be here but it does */
+.show {display: flex;}

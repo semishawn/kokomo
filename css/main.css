@@ -12,15 +12,15 @@
 
 
 
-/* Main */
+/* General */
 body {
 	height: 100%;
 	margin: 0;
-	background: linear-gradient(#EAECC6, #2BC0E4);
+	background: linear-gradient(#eaecc6, #2bc0e4);
 	overflow: hidden;
 }
 
-body, button, input {font-family: 'Heebo', sans-serif;}
+body, button, input {font-family: 'IBM Plex Mono', monospace;}
 
 input {display: none;}
 button {
@@ -45,11 +45,74 @@ button {
 	z-index: 999;
 }
 
+.general {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
 .logo {
 	height: 30px;
 	transition: all 0.25s;
+	cursor: pointer;
 }
 .logo:hover {transform: rotate(-30deg);}
+
+.info-title {
+	font-size: 20px;
+	font-weight: 700;
+	font-style: italic;
+	margin-left: 10px;
+	background: linear-gradient(45deg, #eaecc6, #2bc0e4);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+
+.info-dropdown {
+	position: absolute;
+	left: 0;
+	display: none;
+	flex-direction: column;
+	padding: 15px;
+	background: white;
+	border-radius: var(--main-radius);
+	box-shadow: var(--main-shadow);
+	transform: translateY(calc(50% + var(--nav-height)/2 - 5px));
+	box-sizing: border-box;
+	z-index: 999;
+}
+
+.info-dropdown span {
+	display: block;
+	font-size: 14px;
+	font-weight: 400;
+	color: #999;
+}
+.info-dropdown span + span {margin-top: 5px;}
+
+.funky-link {
+	position: relative;
+	text-decoration: none;
+	color: var(--funky-static);
+}
+.funky-link:before {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	height: 2px;
+	background: var(--funky-static);
+	transform-origin: bottom right;
+	transform: scaleX(0);
+	transition: transform 0.4s;
+}
+.funky-link:hover {color: var(--funky-hover);}
+.funky-link:hover:before {
+	background: var(--funky-hover);
+	transform-origin: bottom left;
+	transform: scaleX(1);
+}
 
 .primary-functions-container {
 	position: absolute;
@@ -59,21 +122,25 @@ button {
 }
 
 .funky-button {
+	--speed: 0.4s;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	height: 38px;
-	font-family: 'IBM Plex Mono', monospace;
 	font-size: 15px;
 	font-weight: 400;
 	font-style: italic;
 	padding: 0 18px;
-	border: 2px dashed var(--funky-button-static);
-	color: var(--funky-button-static);
+	border: 2px dashed var(--funky-static);
+	color: var(--funky-static);
 	background: transparent;
-	transition: all 0.4s;
+	transition: all var(--speed);
 	cursor: pointer;
 	box-sizing: border-box;
 }
 .funky-button svg {margin-right: 6px;}
+.save-icon {width: 20px;}
 .funky-button + .funky-button {margin-left: 8px;}
 .funky-button:before {
 	content: '';
@@ -82,48 +149,34 @@ button {
 	left: 0;
 	right: 0;
 	height: 2px;
-	background-color: var(--funky-button-hover);
+	background: var(--funky-static);
 	transform-origin: bottom right;
 	transform: scaleX(0);
-	transition: transform 0.4s;
+	transition: background var(--speed), transform var(--speed);
 }
 .funky-button:hover {
 	border-style: solid;
-	border-color: var(--funky-button-hover);
-	color: var(--funky-button-hover);
+	border-color: var(--funky-hover);
+	color: var(--funky-hover);
 }
 .funky-button:hover:before {
+	background: var(--funky-hover);
 	transform-origin: bottom left;
 	transform: scaleX(1);
 }
+.saved {
+	color: lime;
+	border-color: lime;
+}
+.saved:hover {
+	color: lime;
+	border-color: lime;
+}
+.saved:before {background: lime;}
 .primary-functions-container > .funky-button {
 	min-width: 100px;
 	padding: 0;
 }
-
-
-
-/* Codemirror */
-.CodeMirror {
-	height: calc(100% - var(--tab-height));
-	font-family: 'Fira Code', monospace;
-	font-size: 14px;
-	scrollbar-color: #fff2 transparent;
-}
-
-.CodeMirror *::-webkit-scrollbar {
-	height: 8px;
-	width: 8px;
-	background: transparent;
-}
-
-.CodeMirror *::-webkit-scrollbar-thumb {
-	background: #fff2;
-	border-radius: 999px;
-}
-.CodeMirror *::-webkit-scrollbar-thumb:hover {background: #fff3;}
-
-.CodeMirror-scrollbar-filler {background: transparent;}
 
 
 
@@ -153,32 +206,13 @@ button {
 	cursor: col-resize;
 }
 
+
+
+/* Code Half */
 .code-container {
 	position: relative;
 	height: 100%;
 	width: 100%;
-}
-
-.box-cycler {
-	position: absolute;
-	top: calc(var(--half-padding) + (var(--tab-height) - var(--small-button-dimension))/2);
-	display: none;
-	align-items: center;
-	height: var(--small-button-dimension);
-	font-size: 13px;
-	padding: 0 10px;
-	border: 0;
-	border-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
-	color: black;
-	background: white;
-	cursor: pointer;
-	user-select: none;
-	z-index: 997;
-}
-.box-cycler svg {
-	font-size: 15px;
-	margin-right: 6px;
 }
 
 .code-box {
@@ -187,6 +221,30 @@ button {
 	overflow: hidden;
 }
 
+.CodeMirror {
+	height: calc(100% - var(--tab-height));
+	font-family: 'Fira Code', monospace;
+	font-size: 14px;
+	scrollbar-color: #fff2 transparent;
+}
+
+.CodeMirror *::-webkit-scrollbar {
+	height: 8px;
+	width: 8px;
+	background: transparent;
+}
+
+.CodeMirror *::-webkit-scrollbar-thumb {
+	background: #fff2;
+	border-radius: 999px;
+}
+.CodeMirror *::-webkit-scrollbar-thumb:hover {background: #fff3;}
+
+.CodeMirror-scrollbar-filler {background: transparent;}
+
+
+
+/* Result Half */
 .result-container {
 	height: 100%;
 	max-height: 100%;
@@ -196,6 +254,7 @@ button {
 	transition: all 0.5s;
 	overflow: hidden;
 }
+
 .mobile-result {
 	width: 2.79in;
 	max-height: 5.65in;
@@ -206,6 +265,33 @@ button {
 	width: 100%;
 	border: none;
 	background-color: white;
+}
+
+.result-zoom-container {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	display: flex;
+	border-top-left-radius: var(--small-radius);
+	box-shadow: 0 0 0 1px #ccc;
+	overflow: hidden;
+}
+.zoom-toggle {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--small-button-dimension);
+	font-family: sans-serif;
+	font-size: 13px;
+	padding: 0 7px;
+	border: 0;
+	color: black;
+	background: white;
+	cursor: pointer;
+}
+input[name="result-zoom"]:checked + .zoom-toggle {
+	color: white;
+	background-color: #888;
 }
 
 
@@ -314,7 +400,7 @@ button {
 	background: white;
 	cursor: pointer;
 }
-input[type="radio"]:checked + .resize-toggle {
+input[name="result-size"]:checked + .resize-toggle {
 	color: white;
 	background-color: #888;
 }
@@ -330,7 +416,7 @@ input[type="radio"]:checked + .resize-toggle {
 	bottom: 0;
 	display: none;
 	background: black;
-	opacity: 0.7;
+	opacity: 0.6;
 	z-index: 999;
 }
 
@@ -358,9 +444,9 @@ input[type="radio"]:checked + .resize-toggle {
 }
 
 .config-content > span {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 400;
-	margin-bottom: 3px;
+	margin-bottom: 4px;
 	color: #ddd;
 }
 
@@ -389,15 +475,14 @@ input[type="radio"]:checked + .resize-toggle {
 	border: 0;
 	border-radius: var(--small-radius);
 	color: #ccc;
-	background: #444;
-	box-shadow: 0 0 4px rgba(0,0,0,0.15);
+	background: #fff2;
 	cursor: pointer;
 }
 .preset svg {
 	font-size: 12px;
 	margin-right: 5px;
 }
-.preset:active {filter: brightness(80%);}
+.preset:hover {background: #fff3;}
 
 .save-close {
 	margin: 0;

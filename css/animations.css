@@ -44,7 +44,7 @@
 
 
 
-/* Tri Editor */
+/* Editor */
 .code-box {
 	animation: fadeUp var(--animation-speed) forwards;
 	opacity: 0;
@@ -59,29 +59,8 @@
 	opacity: 0;
 }
 
-.tri-editor > .gutter-horizontal {
+.gutter-horizontal {
 	animation: fadeIn var(--animation-speed) forwards;
 	animation-delay: calc(var(--initial-delay) + 1.4s);
-	opacity: 0;
-}
-
-
-
-/* JS Editor */
-.js-box {
-	animation: fadeUp var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + 0.4s);
-	opacity: 0;
-}
-
-.console-container {
-	animation: fadeUp var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + 0.6s);
-	opacity: 0;
-}
-
-.js-editor > .gutter-horizontal {
-	animation: fadeIn var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + 0.8s);
 	opacity: 0;
 }
