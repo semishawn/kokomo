@@ -137,7 +137,7 @@ $('input[type="radio"][name="layout"]').change(function() {
 	if ($(this).is('#boxes-layout')) {
 		if ($('.code-container').find('.gutter').length > 0) stackSplit.destroy();
 		$('.code-container').attr('class', 'code-container boxes');
-		$('.box-cycler').addClass('show');
+		$('.box-cycler').css('display', 'flex');
 	}
 });
 
@@ -146,7 +146,7 @@ function notBoxes() {
 	$('.code-container').prepend($('.css'));
 	$('.code-container').prepend($('.js'));
 	$('.code-box').css({'animation': 'none', 'opacity': '1'});
-	$('.box-cycler').removeClass('show');
+	$('.box-cycler').css('display', 'none');
 }
 
 $('.box-cycler').click(function() {
@@ -247,11 +247,7 @@ $('.export-button').click(function() {
 
 
 
-// Ask before closing if editors were changed
-/* window.addEventListener('beforeunload', function(e) {
-	if (html.getValue() != html.getValue() && css.getValue() != css.getValue() && js.getValue() != js.getValue()) {
-		var confirmationMessage = '\o/';
-		(e || window.event).returnValue = confirmationMessage;
-		return confirmationMessage;
-	}
-}); */
+// Ask before closing if editors have been changed
+window.onbeforeunload = function() {
+	if (html.getValue() != '' || css.getValue() != '' || js.getValue() != '') return '';
+}

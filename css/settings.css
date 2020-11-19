@@ -5,7 +5,7 @@
 	right: 0;
 	display: none;
 	flex-direction: column;
-	font-size: 14px;
+	font-size: 15px;
 	padding: 15px;
 	margin-top: 5px;
 	background: white;
@@ -26,7 +26,7 @@
 .editor-toggle {
 	display: flex;
 	align-items: center;
-	width: 200px;
+	width: 190px;
 }
 
 .flip-button {

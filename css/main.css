@@ -20,7 +20,7 @@ body {
 	overflow: hidden;
 }
 
-body, button, input {font-family: 'IBM Plex Mono', monospace;}
+body, button, input {font-family: 'IBM Plex Sans', sans-serif;}
 
 input {display: none;}
 button {
@@ -53,16 +53,17 @@ button {
 
 .logo {
 	height: 30px;
+	transform: rotate(-30deg);
 	transition: all 0.25s;
 	cursor: pointer;
 }
-.logo:hover {transform: rotate(-30deg);}
+.logo:hover {transform: rotate(0deg);}
 
 .info-title {
-	font-size: 20px;
+	font-size: 22px;
 	font-weight: 700;
 	font-style: italic;
-	margin-left: 10px;
+	margin-left: 6px;
 	background: linear-gradient(45deg, #eaecc6, #2bc0e4);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
@@ -84,7 +85,7 @@ button {
 
 .info-dropdown span {
 	display: block;
-	font-size: 14px;
+	font-size: 15px;
 	font-weight: 400;
 	color: #999;
 }
@@ -128,7 +129,7 @@ button {
 	justify-content: center;
 	align-items: center;
 	height: 38px;
-	font-size: 15px;
+	font-size: 16px;
 	font-weight: 400;
 	font-style: italic;
 	padding: 0 18px;
@@ -272,10 +273,14 @@ button {
 	bottom: 0;
 	right: 0;
 	display: flex;
+	opacity: 0.3;
 	border-top-left-radius: var(--small-radius);
 	box-shadow: 0 0 0 1px #ccc;
+	transition: opacity 0.3s;
 	overflow: hidden;
 }
+.result-zoom-container:hover {opacity: 1;}
+
 .zoom-toggle {
 	display: flex;
 	align-items: center;
@@ -315,7 +320,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 }
 
 .tab-title {
-	font-size: 15px;
+	font-size: 16px;
 	user-select: none;
 }
 .iconless-tab-title {margin-left: 15px;}
@@ -444,7 +449,7 @@ input[name="result-size"]:checked + .resize-toggle {
 }
 
 .config-content > span {
-	font-size: 13px;
+	font-size: 15px;
 	font-weight: 400;
 	margin-bottom: 4px;
 	color: #ddd;
@@ -469,7 +474,7 @@ input[name="result-size"]:checked + .resize-toggle {
 	align-items: center;
 	justify-content: center;
 	height: var(--small-button-dimension);
-	font-size: 13px;
+	font-size: 14px;
 	padding: 0 10px;
 	margin-right: 7px;
 	border: 0;
