@@ -12,7 +12,8 @@ var html = CodeMirror.fromTextArea(document.getElementById('html-editor'), {
 	tabSize: 4,
 	indentUnit: 4,
 	indentWithTabs: true,
-	scrollPastEnd: true
+	scrollPastEnd: true,
+	autoRefresh: true
 });
 emmetCodeMirror(html, {
 	'Tab': 'emmet.expand_abbreviation_with_tab',
@@ -29,7 +30,8 @@ var css = CodeMirror.fromTextArea(document.getElementById('css-editor'), {
 	tabSize: 4,
 	indentUnit: 4,
 	indentWithTabs: true,
-	scrollPastEnd: true
+	scrollPastEnd: true,
+	autoRefresh: true
 });
 var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 	mode: 'text/javascript',
@@ -42,7 +44,8 @@ var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 	tabSize: 4,
 	indentUnit: 4,
 	indentWithTabs: true,
-	scrollPastEnd: true
+	scrollPastEnd: true,
+	autoRefresh: true
 });
 
 
@@ -51,22 +54,26 @@ var js = CodeMirror.fromTextArea(document.getElementById('js-editor'), {
 var head = CodeMirror.fromTextArea(document.getElementById('head'), {
 	mode: 'htmlmixed',
 	theme: 'kokomo-syntax',
+	lineWrapping: true,
 	lineNumbers: true,
 	matchBrackets: true,
 	autoCloseBrackets: true,
 	smartIndent: true,
 	tabSize: 4,
 	indentUnit: 4,
-	indentWithTabs: true
+	indentWithTabs: true,
+	autoRefresh: true
 });
 var plugins = CodeMirror.fromTextArea(document.getElementById('plugins'), {
 	mode: 'htmlmixed',
 	theme: 'kokomo-syntax',
+	lineWrapping: true,
 	lineNumbers: true,
 	matchBrackets: true,
 	autoCloseBrackets: true,
 	smartIndent: true,
 	tabSize: 4,
 	indentUnit: 4,
-	indentWithTabs: true
+	indentWithTabs: true,
+	autoRefresh: true
 });

@@ -5,7 +5,7 @@
 	<!-- Meta -->
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Kokomo - Web Editor</title>
+	<title>Kokomo - HTML Editor</title>
 	<link rel="icon" type="image/png" href="icons/favicon.png">
 
 	<!-- Fonts -->
@@ -17,8 +17,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/xml/xml.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/javascript/javascript.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/css/css.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/htmlmixed/htmlmixed.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/edit/matchbrackets.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/addon/edit/closebrackets.js"></script>
@@ -43,17 +41,17 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/split.js/1.5.11/split.min.js"></script>
 </head>
 
-<body class="web-body">
+<body class="html-body">
 	<div class="nav">
 		<div class="info-container">
 			<img class="logo" src="icons/logo.svg">
 			<span class="info-title">Welcome to Kokomo!</span>
 			<div class="info-dropdown">
-				<span>Kokomo Web Editor</span>
+				<span>Kokomo HTML Editor</span>
 				<span>Version 1.0.0</span>
 				<span>Made by <a class="funky-link" href="https://github.com/semishawn"><i class="fab fa-github-alt" style="margin-right: 5px;"></i>semishawn</a>
 				</span>
-				<span>Try out the <a class="funky-link" href="html">HTML Editor</a></span>
+				<span>Try out the <a class="funky-link" href="./">Web Editor</a></span>
 			</div>
 		</div>
 
@@ -65,28 +63,6 @@
 		<div class="settings">
 			<button class="funky-button settings-select"><i class="fas fa-cog"></i>Settings</button>
 			<div class="settings-dropdown">
-				<div class="options layout-options">
-					<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
-					<label class="layout" for="layers-layout">
-						<span class="layout-icon layers-icon"><span></span><span></span><span></span></span>
-						Layers
-					</label>
-
-					<input type="radio" name="layout" id="stack-layout" autocomplete="off">
-					<label class="layout" for="stack-layout">
-						<span class="layout-icon stack-icon"><span></span><span></span><span></span></span>
-						Stack
-					</label>
-
-					<input type="radio" name="layout" id="boxes-layout" autocomplete="off">
-					<label class="layout" for="boxes-layout">
-						<span class="layout-icon boxes-icon"><span></span><span></span><span></span></span>
-						Boxes
-					</label>
-				</div>
-
-				<div class="separator"></div>
-
 				<div class="options editor-options">
 					<div class="editor-toggle">
 						<input id="line-wrapping" type="checkbox" autocomplete="off" checked>
@@ -104,36 +80,13 @@
 	</div>
 
 	<div class="editor">
+		<!-- HTML -->
 		<div class="half code-half">
-
-			<div class="box-cycler"><i class="fas fa-sync-alt"></i>Cycle Editors</div>
-
-			<div class="code-container layers">
-				<!-- JS -->
-				<div class="code-box js">
-					<div class="tab">
-						<img class="lang-icon" src="icons/languages/js.svg">
-						<span class="tab-title">Javascript</span>
-						<button class="config-button"><i class="fas fa-tools"></i></button>
-					</div>
-					<textarea id="js-editor"></textarea>
-				</div>
-
-				<!-- CSS -->
-				<div class="code-box css">
-					<div class="tab">
-						<img class="lang-icon" src="icons/languages/css.svg">
-						<span class="tab-title">CSS</span>
-					</div>
-					<textarea id="css-editor"></textarea>
-				</div>
-
-				<!-- HTML -->
+			<div class="code-container">
 				<div class="code-box html">
 					<div class="tab">
 						<img class="lang-icon" src="icons/languages/html.svg">
 						<span class="tab-title">HTML</span>
-						<button class="config-button"><i class="fas fa-tools"></i></button>
 					</div>
 					<textarea id="html-editor"></textarea>
 				</div>
@@ -173,45 +126,8 @@
 		</div>
 	</div>
 
-	<div class="body-block"></div>
-
-	<!-- HTML Configuration -->
-	<div class="config-dialogue html-config">
-		<div class="tab">
-			<span class="tab-title iconless-tab-title">HTML Configuration</span>
-		</div>
-		<div class="config-content">
-			<span>Custom Metadata/Stylesheets:</span>
-			<textarea id="head"></textarea>
-			<div class="preset-container metadata-presets">
-				<button class="preset" id="charset-preset"><i class="fas fa-plus"></i>Common charset</button>
-				<button class="preset" id="viewport-preset"><i class="fas fa-plus"></i>Common viewport</button>
-			</div>
-			<button class="funky-button save-close">Save & Close</button>
-		</div>
-	</div>
-
-	<!-- JS Configuration -->
-	<div class="config-dialogue js-config">
-		<div class="tab">
-			<span class="tab-title iconless-tab-title">Javascript Configuration</span>
-		</div>
-		<div class="config-content">
-			<span>Custom plugins:</span>
-			<textarea id="plugins"></textarea>
-			<div class="preset-container plugin-presets">
-				<button class="preset" id="jquery-preset"><i class="fas fa-plus"></i>jQuery</button>
-				<button class="preset" id="react-preset"><i class="fas fa-plus"></i>React</button>
-				<button class="preset" id="angular-preset"><i class="fas fa-plus"></i>Angular</button>
-				<button class="preset" id="vue-preset"><i class="fas fa-plus"></i>Vue</button>
-				<button class="preset" id="bootstrap-preset"><i class="fas fa-plus"></i>Bootstrap</button>
-			</div>
-			<button class="funky-button save-close">Save & Close</button>
-		</div>
-	</div>
-
 	<script src="js/codemirror.js"></script>
-	<script src="js/main.js"></script>
+	<script src="js/html.js"></script>
 </body>
 
 </html>

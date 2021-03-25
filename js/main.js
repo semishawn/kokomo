@@ -1,9 +1,7 @@
 // Initialization
 $(document).ready(function() {
-/* 	html.refresh();
-	css.refresh();
-	js.refresh();
-	html.setValue(localStorage.getItem('currentHtml'));
+	$('.CodeMirror').each((i, e) => e.CodeMirror.refresh());
+/* 	html.setValue(localStorage.getItem('currentHtml'));
 	css.setValue(localStorage.getItem('currentCss'));
 	js.setValue(localStorage.getItem('currentJs'));
 	head.setValue(localStorage.getItem('currentHead'));
@@ -20,16 +18,16 @@ Split(['.code-half', '.result-half'], {
 
 
 
-// General dropdown
+// General information dropdown
 $('.logo').click(() => $('.info-dropdown').toggleClass('show'));
 
 
 
-// Close dropdowns on click
+// Close dropdowns on click elsewhere
 $(document).click(function(e) {
 	if (!$(e.target).closest('.settings').length) $('.settings-dropdown').removeClass('show');
-	if (!$(e.target).closest('.general').length) $('.info-dropdown').removeClass('show');
-	$('.result').contents().click(function() {
+	if (!$(e.target).closest('.info-container').length) $('.info-dropdown').removeClass('show');
+	$('#result').contents().click(function() {
 		$('.info-dropdown').removeClass('show');
 		$('.settings-dropdown').removeClass('show');
 	});
@@ -47,7 +45,6 @@ $('.run').click(function() {
 			<head>
 				${head.getValue()}
 				<style>
-				body {transform-origin: left top;}
 				${css.getValue()}
 				</style>
 			</head>
@@ -64,6 +61,7 @@ $('.run').click(function() {
 	result.document.open();
 	result.document.write(meat);
 	result.document.close();
+	$('#result').contents().find('body').css('transform-origin', 'left top');
 	$('.export-button').removeClass('disabled');
 	zoom();
 });
@@ -73,7 +71,6 @@ $('.run').click(function() {
 // Save editor values
 $('.save').click(function() {
 	alert('Heads up: Proper saving hasn\'t been implemented yet.');
-
 /* 	localStorage.setItem('currentHtml', html.getValue());
 	localStorage.setItem('currentCss', css.getValue());
 	localStorage.setItem('currentJs', js.getValue());
@@ -107,9 +104,9 @@ $('input[name="result-size"]').change(function() {
 // Change result zoom
 $('input[name="result-zoom"]').change(function() {zoom()});
 function zoom() {
-	if ($('#100-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(100%)');
-	if ($('#200-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(200%)');
-	if ($('#300-percent').is(':checked')) $('.result').contents().find('body').css('transform', 'scale(300%)');
+	if ($('#zoom1').is(':checked')) $('#result').css({'transform': 'scale(1)'});
+	if ($('#zoom2').is(':checked')) $('#result').css({'transform': 'scale(2)'});
+	if ($('#zoom3').is(':checked')) $('#result').css({'transform': 'scale(3)'});
 }
 
 
@@ -160,29 +157,16 @@ $('.box-cycler').click(function() {
 	$('.code-box').css({'animation': 'none', 'opacity': '1'});
 });
 
+
+
+// Choose line wrapping and line numbers
 $('#line-wrapping').change(function() {
-	if (!$(this).is(':checked')) {
-		html.setOption('lineWrapping', false);
-		css.setOption('lineWrapping', false);
-		js.setOption('lineWrapping', false);
-	}
-	else {
-		html.setOption('lineWrapping', true);
-		css.setOption('lineWrapping', true);
-		js.setOption('lineWrapping', true);
-	}
+	if (!$(this).is(':checked')) $('.CodeMirror').each((i, e) => e.CodeMirror.setOption('lineWrapping', false));
+	else $('.CodeMirror').each((i, e) => e.CodeMirror.setOption('lineWrapping', true));
 });
 $('#line-numbers').change(function() {
-	if (!$(this).is(':checked')) {
-		html.setOption('lineNumbers', false);
-		css.setOption('lineNumbers', false);
-		js.setOption('lineNumbers', false);
-	}
-	else {
-		html.setOption('lineNumbers', true);
-		css.setOption('lineNumbers', true);
-		js.setOption('lineNumbers', true);
-	}
+	if (!$(this).is(':checked')) $('.CodeMirror').each((i, e) => e.CodeMirror.setOption('lineNumbers', false));
+	else $('.CodeMirror').each((i, e) => e.CodeMirror.setOption('lineNumbers', true));
 });
 
 
@@ -240,14 +224,16 @@ $('.preset').click(function() {
 
 // Export file
 $('.export-button').click(function() {
-	meatFormatted = meat.replaceAll('\t', '');
+	var meatFormatted = '<!--\n\tUpon export, some styling and configuration filters are applied.\n\tTabs, spaces, new lines, and white space may need to be manually adjusted.\n-->\n' + meat.replaceAll('\t', '');
 	var meatBlob = new Blob([meatFormatted], {type: 'text/plain'});
 	$(this).attr('href', URL.createObjectURL(meatBlob));
 });
 
 
 
-// Ask before closing if editors have been changed
+// If editors have been changed, ask before closing
 window.onbeforeunload = function() {
-	if (html.getValue() != '' || css.getValue() != '' || js.getValue() != '') return '';
+	var valuesCheck = '';
+	$('.CodeMirror').each((i, e) => valuesCheck += e.CodeMirror.getValue());
+	if (valuesCheck != '') return '';
 }

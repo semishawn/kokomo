@@ -1,5 +1,6 @@
 :root {
 	--nav-height: 52px;
+	--nav-padding: 10px;
 	--half-padding: 30px;
 	--tab-height: 38px;
 	--main-radius: 5px;
@@ -13,12 +14,20 @@
 
 
 /* General */
-body {
+html, body {
 	height: 100%;
-	margin: 0;
-	background: linear-gradient(#eaecc6, #2bc0e4);
+	width: 100%;
 	overflow: hidden;
 }
+
+body {
+	display: flex;
+	flex-direction: column;
+	margin: 0;
+}
+
+.web-body {background: linear-gradient(#eaecc6, #2bc0e4);}
+.html-body {background: linear-gradient(#ffcd71, #f66);}
 
 body, button, input {font-family: 'IBM Plex Sans', sans-serif;}
 
@@ -38,15 +47,13 @@ button {
 	justify-content: space-between;
 	height: var(--nav-height);
 	width: 100%;
-	font-size: 16px;
-	padding: 0 10px;
-	background-color: var(--nav);
+	padding: 0 var(--nav-padding);
+	background: var(--nav);
 	box-sizing: border-box;
 	z-index: 999;
 }
 
-.general {
-	position: relative;
+.info-container {
 	display: flex;
 	align-items: center;
 }
@@ -64,21 +71,30 @@ button {
 	font-weight: 700;
 	font-style: italic;
 	margin-left: 6px;
+}
+.web-body .info-title {
 	background: linear-gradient(45deg, #eaecc6, #2bc0e4);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+.html-body .info-title {
+	background: linear-gradient(45deg, #ffcd71, #f66);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 
 .info-dropdown {
 	position: absolute;
-	left: 0;
+	left: var(--nav-padding);
+	bottom: 3px;
 	display: none;
 	flex-direction: column;
 	padding: 15px;
-	background: white;
+	margin-top: 5px;
 	border-radius: var(--main-radius);
 	box-shadow: var(--main-shadow);
-	transform: translateY(calc(50% + var(--nav-height)/2 - 5px));
+	background: white;
+	transform: translateY(100%);
 	box-sizing: border-box;
 	z-index: 999;
 }
@@ -184,12 +200,12 @@ button {
 /* Editors */
 .editor {
 	position: relative;
-	height: calc(100vh - var(--nav-height));
+	flex: 1;
+	display: flex;
 	width: 100%;
 }
 
 .half {
-	float: left;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -202,7 +218,6 @@ button {
 .gutter-horizontal {
 	height: 100%;
 	width: 10px;
-	float: left;
 	background: rgba(0,0,0,0.1);
 	cursor: col-resize;
 }
@@ -217,16 +232,24 @@ button {
 }
 
 .code-box {
+	display: flex;
+	flex-direction: column;
 	border-radius: var(--main-radius);
 	box-shadow: var(--main-shadow);
 	overflow: hidden;
 }
+.html-body .html {height: 100%;}
 
+.code-box .CodeMirror {flex: 1;}
+
+
+
+/* CodeMirror */
 .CodeMirror {
-	height: calc(100% - var(--tab-height));
 	font-family: 'Fira Code', monospace;
 	font-size: 14px;
 	scrollbar-color: #fff2 transparent;
+	cursor: text;
 }
 
 .CodeMirror *::-webkit-scrollbar {
@@ -247,6 +270,8 @@ button {
 
 /* Result Half */
 .result-container {
+	display: flex;
+	flex-direction: column;
 	height: 100%;
 	max-height: 100%;
 	width: 100%;
@@ -261,11 +286,12 @@ button {
 	max-height: 5.65in;
 }
 
-.result {
-	height: calc(100% - var(--tab-height));
+#result {
+	flex: 1;
 	width: 100%;
 	border: none;
-	background-color: white;
+	background: white;
+	transform-origin: 0 0;
 }
 
 .result-zoom-container {
@@ -273,13 +299,20 @@ button {
 	bottom: 0;
 	right: 0;
 	display: flex;
+	align-items: center;
 	opacity: 0.3;
 	border-top-left-radius: var(--small-radius);
-	box-shadow: 0 0 0 1px #ccc;
+	box-shadow: var(--small-button-shadow);
+	background: white;
 	transition: opacity 0.3s;
 	overflow: hidden;
 }
 .result-zoom-container:hover {opacity: 1;}
+
+.result-zoom-container svg {
+	font-size: 15px;
+	padding: 0 8px;
+}
 
 .zoom-toggle {
 	display: flex;
@@ -288,15 +321,15 @@ button {
 	height: var(--small-button-dimension);
 	font-family: sans-serif;
 	font-size: 13px;
-	padding: 0 7px;
+	padding: 0 10px;
 	border: 0;
 	color: black;
-	background: white;
 	cursor: pointer;
 }
+.zoom-toggle:hover {background: #ddd;}
 input[name="result-zoom"]:checked + .zoom-toggle {
 	color: white;
-	background-color: #888;
+	background: #888;
 }
 
 
@@ -334,7 +367,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	font-size: 16px;
 	padding: 0;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension))/2);
+	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
 	border: 0;
 	border-radius: var(--small-radius);
 	box-shadow: var(--small-button-shadow);
@@ -350,7 +383,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 .result-buttons {
 	display: flex;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension))/2);
+	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
 }
 
 .export-button {
@@ -362,7 +395,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	text-decoration: none;
 	padding: 0 10px;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension))/2);
+	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
 	border: 0;
 	border-radius: var(--small-radius);
 	box-shadow: var(--small-button-shadow);
@@ -407,7 +440,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 }
 input[name="result-size"]:checked + .resize-toggle {
 	color: white;
-	background-color: #888;
+	background: #888;
 }
 
 
@@ -474,7 +507,7 @@ input[name="result-size"]:checked + .resize-toggle {
 	align-items: center;
 	justify-content: center;
 	height: var(--small-button-dimension);
-	font-size: 14px;
+	font-size: 13px;
 	padding: 0 10px;
 	margin-right: 7px;
 	border: 0;
