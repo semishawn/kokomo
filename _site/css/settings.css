@@ -1,0 +1,89 @@
+.settings-dropdown {
+	position: absolute;
+	right: var(--nav-padding);
+	bottom: 3px;
+	display: none;
+	flex-direction: column;
+	font-size: 15px;
+	padding: 15px;
+	border-radius: var(--main-radius);
+	box-shadow: 0 0 25px rgba(0,0,0,0.3);
+	background: white;
+	transform: translateY(100%);
+	z-index: 999;
+}
+
+.options {display: flex;}
+
+.separator {
+	height: 2px;
+	width: 100%;
+	margin: 10px 0;
+	background: #eee;
+}
+
+.editor-toggle {
+	display: flex;
+	align-items: center;
+	width: 190px;
+}
+
+.flip-btn {
+	position: relative;
+	display: block;
+	height: 32px;
+	width: 60px;
+	font-weight: 500;
+	padding: 0;
+	transition: all 0.2s ease;
+	perspective: 100px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+
+.flip-btn:before, .flip-btn:after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	padding: 0;
+	color: #fff;
+	border-radius: var(--small-radius);
+	backface-visibility: hidden;
+	transition: all 0.4s ease;
+}
+
+.flip-btn:before {
+	content: attr(data-no);
+	background: #FF3A19;
+}
+
+.flip-btn:after {
+	content: attr(data-yes);
+	background: #02C66F;
+	transform: rotateY(-180deg);
+}
+
+input[type="checkbox"]:checked + .flip-btn:before {transform: rotateY(180deg);}
+
+input[type="checkbox"]:checked + .flip-btn:after {
+	transform: rotateY(0);
+	left: 0;
+}
+
+.flip-btn:active:before {transform: rotateY(-20deg);}
+input[type="checkbox"]:checked + .flip-btn:active:after {transform: rotateY(20deg);}
+
+.editor-toggle span {
+	margin-left: 8px;
+	white-space: nowrap;
+}
+
+
+
+/* idk why this has to be here but it does */
+.show {display: flex;}

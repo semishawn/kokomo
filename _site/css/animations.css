@@ -1,0 +1,77 @@
+:root {
+	--animation-speed: 0.7s;
+	--initial-delay: 0.4s;
+	--after-nav-delay: 0.4s;
+	--animation-increment: 0.2s;
+}
+
+
+
+/* Actual animations */
+@keyframes fadeDown {
+	0% {
+		opacity: 0;
+		transform: translateY(-80px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeUp {
+	0% {
+		opacity: 0;
+		transform: translateY(80px);
+	}
+	100% {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes fadeIn {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
+
+
+/* Regular editor */
+.nav {
+	animation: fadeDown var(--animation-speed) forwards;
+	animation-delay: var(--initial-delay);
+	opacity: 0;
+}
+
+.code-box, .result-container, .console-container {
+	animation: fadeUp var(--animation-speed) forwards;
+	opacity: 0;
+}
+
+.code-box {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay));}
+
+.result-container,
+.console-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
+
+.gutter-horizontal {
+	animation: fadeIn var(--animation-speed) forwards;
+	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 2 * var(--animation-increment));
+	opacity: 0;
+}
+
+
+
+/* Web editor */
+.web-body .code-container {
+	animation: none;
+	opacity: 1;
+}
+
+.web-body .html {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
+.web-body .css {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 2 * var(--animation-increment));}
+.web-body .js {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 3 * var(--animation-increment));}
+
+.web-body .result-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 4 * var(--animation-increment));}
+
+.web-body .gutter-horizontal {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 5 * var(--animation-increment));}
