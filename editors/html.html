@@ -1,0 +1,122 @@
+---
+title: "HTML"
+extension: "html"
+version: 1.0.0
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	{% include head.html %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/xml/xml.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/edit/matchbrackets.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/addon/fold/xml-fold.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/emmet-codemirror@1.2.5/dist/emmet.min.js"></script>
+
+	<style>:root {--gradient: #ffcd71, #f66;}</style>
+</head>
+
+<body class="regular-body {{ page.extension }}-body">
+	{% include nav.html %}
+
+	<div class="editor-content">
+		<div class="half code-half">
+			<div class="code-box">
+				<div class="tab">
+					<img class="lang-icon" src="{{ site.baseurl }}/icons/languages/{{ page.extension }}.svg">
+					<span class="tab-title">{{ page.title }}</span>
+				</div>
+				<textarea id="{{ page.extension }}-editor"></textarea>
+			</div>
+		</div>
+
+		<div class="half result-half">
+			<div class="result-container desktop-result">
+				<div class="tab">
+					<span class="tab-title iconless-tab-title">Result</span>
+					<div class="result-btn-container">
+						<a class="tab-btn export-btn disabled" download="KokomoExport.html"><i class="fas fa-download"></i>Export</a>
+						<div class="resize-toggle-container">
+							<input type="radio" name="result-size" id="desktop-size" autocomplete="off" checked>
+							<label class="resize-toggle" for="desktop-size"><i class="fas fa-expand"></i></label>
+
+							<input type="radio" name="result-size" id="mobile-size" autocomplete="off">
+							<label class="resize-toggle" for="mobile-size"><i class="fas fa-mobile-alt"></i></label>
+						</div>
+					</div>
+				</div>
+				<iframe id="result"></iframe>
+				<div class="result-zoom-container">
+					<i class="fas fa-search-plus"></i>
+
+					<input type="radio" name="result-zoom" id="zoom1" autocomplete="off" checked>
+					<label class="zoom-toggle" for="zoom1">1x</label>
+
+					<input type="radio" name="result-zoom" id="zoom2" autocomplete="off">
+					<label class="zoom-toggle" for="zoom2">2x</label>
+
+					<input type="radio" name="result-zoom" id="zoom3" autocomplete="off">
+					<label class="zoom-toggle" for="zoom3">3x</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ site.baseurl }}/js/main.js"></script>
+	<script>
+		var html = CodeMirror.fromTextArea(document.getElementById("html-editor"), {
+			mode: "htmlmixed",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			matchTags: {bothTags: true},
+			extraKeys: {"Ctrl-J": "toMatchingTag"},
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			scrollPastEnd: true,
+			autoRefresh: true
+		});
+		emmetCodeMirror(html, {
+			"Tab": "emmet.expand_abbreviation_with_tab",
+			"Cmd-Alt-B": "emmet.balance_outward"
+		});
+
+
+
+		// Initialization
+		$(document).ready(function() {
+			$(".CodeMirror").each((i, e) => e.CodeMirror.refresh());
+			// html.setValue(localStorage.getItem('currentHtml'));
+		});
+
+
+
+		// Update result
+		$(".run").click(function() {
+			var result = document.getElementById("result");
+				result = result.contentWindow || result.contentDocument.document || result.contentDocument;
+			meat = html.getValue();
+			result.document.open();
+			result.document.write(meat);
+			result.document.close();
+			zoom();
+		});
+
+
+
+		// Export file
+		$(".export-btn").click(function() {
+			var meatFormatted = "<!--\n\tUpon export, some styling and configuration filters are applied.\n\tTabs, spaces, new lines, and white space may need to be manually adjusted.\n-->\n" + meat.replaceAll("\t", "");
+			var meatBlob = new Blob([meatFormatted], {type: 'text/plain'});
+			$(this).attr("href", URL.createObjectURL(meatBlob));
+		});
+	</script>
+</body>
+
+</html>

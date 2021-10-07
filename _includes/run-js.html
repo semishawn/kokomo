@@ -1,0 +1,19 @@
+<script>
+	// Run backend binary file
+	$(".run").click(function() {
+		$.ajax({
+			type: "GET",
+			data: {
+				code: {{ page.extension }}.getValue(),
+				extension: "{{ page.extension }}",
+				bin: "{{ page.bin }}",
+				options: "{{ page.options }}"
+			},
+			url: "https://kokomo-backend.herokuapp.com/shell.php",
+			success: function(xhr) {
+				if (!xhr.endsWith("\n")) xhr += "\n";
+				$("#console").append("<span class=\"log-id\">$ {{ page.bin }} main.{{ page.extension }}</span>", "\n", xhr, "\n");
+			}
+		});
+	});
+</script>

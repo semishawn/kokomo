@@ -1,4 +1,11 @@
 :root {
+	/* Colors */
+	--nav: #232840;
+	--funky-static: #f6c113;
+	--funky-hover: #00a3f7;
+	--tab-gradient: #eaeaea, #d2d2d2;
+
+	/* Values */
 	--nav-height: 52px;
 	--nav-padding: 10px;
 	--half-padding: 30px;
@@ -7,8 +14,8 @@
 	--small-radius: 4px;
 	--main-shadow: 0 0 25px rgba(0,0,0,0.3);
 	--code-box-margin: 10px;
-	--small-button-dimension: 26px;
-	--small-button-shadow: 0 0 4px rgba(0,0,0,0.15);
+	--small-btn-dimension: 26px;
+	--small-btn-shadow: 0 0 4px rgba(0,0,0,0.15);
 }
 
 
@@ -24,10 +31,8 @@ body {
 	display: flex;
 	flex-direction: column;
 	margin: 0;
+	background: linear-gradient(var(--gradient));
 }
-
-.web-body {background: linear-gradient(#eaecc6, #2bc0e4);}
-.html-body {background: linear-gradient(#ffcd71, #f66);}
 
 body, button, input {font-family: 'IBM Plex Sans', sans-serif;}
 
@@ -71,14 +76,7 @@ button {
 	font-weight: 700;
 	font-style: italic;
 	margin-left: 6px;
-}
-.web-body .info-title {
-	background: linear-gradient(45deg, #eaecc6, #2bc0e4);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
-.html-body .info-title {
-	background: linear-gradient(45deg, #ffcd71, #f66);
+	background: linear-gradient(45deg, var(--gradient));
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
@@ -138,7 +136,7 @@ button {
 	transform: translateX(-50%);
 }
 
-.funky-button {
+.funky-btn {
 	--speed: 0.4s;
 	position: relative;
 	display: flex;
@@ -156,10 +154,10 @@ button {
 	cursor: pointer;
 	box-sizing: border-box;
 }
-.funky-button svg {margin-right: 6px;}
+.funky-btn svg {margin-right: 6px;}
 .save-icon {width: 20px;}
-.funky-button + .funky-button {margin-left: 8px;}
-.funky-button:before {
+.funky-btn + .funky-btn {margin-left: 8px;}
+.funky-btn:before {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -171,34 +169,27 @@ button {
 	transform: scaleX(0);
 	transition: background var(--speed), transform var(--speed);
 }
-.funky-button:hover {
+.funky-btn:hover {
 	border-style: solid;
 	border-color: var(--funky-hover);
 	color: var(--funky-hover);
 }
-.funky-button:hover:before {
+.funky-btn:hover:before {
 	background: var(--funky-hover);
 	transform-origin: bottom left;
 	transform: scaleX(1);
 }
-.saved {
-	color: lime;
-	border-color: lime;
-}
-.saved:hover {
-	color: lime;
-	border-color: lime;
-}
-.saved:before {background: lime;}
-.primary-functions-container > .funky-button {
+.primary-functions-container .funky-btn {
 	min-width: 100px;
 	padding: 0;
 }
+.run {--funky-hover: #5f5;}
+.reset {--funky-hover: #f55;}
 
 
 
 /* Editors */
-.editor {
+.editor-content {
 	position: relative;
 	flex: 1;
 	display: flex;
@@ -206,6 +197,7 @@ button {
 }
 
 .half {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -218,29 +210,43 @@ button {
 .gutter-horizontal {
 	height: 100%;
 	width: 10px;
-	background: rgba(0,0,0,0.1);
+	background: rgba(0, 0, 0, 0.1);
 	cursor: col-resize;
 }
 
 
 
-/* Code Half */
-.code-container {
-	position: relative;
-	height: 100%;
-	width: 100%;
-}
-
+/* Code half */
 .code-box {
+	position: absolute;
 	display: flex;
 	flex-direction: column;
 	border-radius: var(--main-radius);
 	box-shadow: var(--main-shadow);
+	z-index: 1;
 	overflow: hidden;
 }
-.html-body .html {height: 100%;}
 
 .code-box .CodeMirror {flex: 1;}
+
+
+
+/* Regular Editor */
+.regular-body .code-box {
+	top: var(--half-padding);
+	bottom: var(--half-padding);
+	left: var(--half-padding);
+	right: var(--half-padding);
+}
+
+
+
+/* Web editor */
+.multi-code-positioner {
+	position: relative;
+	height: 100%;
+	width: 100%;
+}
 
 
 
@@ -268,12 +274,11 @@ button {
 
 
 
-/* Result Half */
+/* Result */
 .result-container {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
-	max-height: 100%;
 	width: 100%;
 	border-radius: var(--main-radius);
 	box-shadow: var(--main-shadow);
@@ -302,7 +307,7 @@ button {
 	align-items: center;
 	opacity: 0.3;
 	border-top-left-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
+	box-shadow: var(--small-btn-shadow);
 	background: white;
 	transition: opacity 0.3s;
 	overflow: hidden;
@@ -318,7 +323,7 @@ button {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--small-button-dimension);
+	height: var(--small-btn-dimension);
 	font-family: sans-serif;
 	font-size: 13px;
 	padding: 0 10px;
@@ -334,6 +339,38 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 
 
 
+/* Console */
+.console-container {
+	position: absolute;
+	top: var(--half-padding);
+	bottom: var(--half-padding);
+	left: var(--half-padding);
+	right: var(--half-padding);
+	display: flex;
+	flex-direction: column;
+	border-radius: var(--main-radius);
+	box-shadow: var(--main-shadow);
+	transition: all 0.5s;
+	overflow: hidden;
+}
+
+#console {
+	flex: 1;
+	width: 100%;
+	font-family: 'Fira Code', monospace;
+	font-size: 14px;
+	padding: 10px;
+	color: white;
+	background: #222;
+	white-space: pre;
+	overflow-y: scroll;
+	box-sizing: border-box;
+}
+
+#console::-webkit-scrollbar {background: red;}
+
+
+
 /* Tab */
 .tab {
 	display: flex;
@@ -341,7 +378,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	height: var(--tab-height);
 	width: 100%;
 	color: grey;
-	background: linear-gradient(to top, #d2d2d2, #eaeaea);
+	background: linear-gradient(var(--tab-gradient));
 	box-sizing: border-box;
 	overflow: hidden;
 }
@@ -358,60 +395,59 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 }
 .iconless-tab-title {margin-left: 15px;}
 
-.config-button {
+.config-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--small-button-dimension);
-	width: var(--small-button-dimension);
+	height: var(--small-btn-dimension);
+	width: var(--small-btn-dimension);
 	font-size: 16px;
 	padding: 0;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
+	margin-right: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
 	border: 0;
 	border-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
+	box-shadow: var(--small-btn-shadow);
 	color: black;
 	background: white;
 	cursor: pointer;
 }
-.config-button:active {
+.config-btn:active {
 	color: white;
 	background: #888;
 }
 
-.result-buttons {
+.result-btn-container {
 	display: flex;
 	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
+	margin-right: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
 }
 
-.export-button {
+.tab-btn {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--small-button-dimension);
+	height: var(--small-btn-dimension);
 	font-size: 13px;
 	text-decoration: none;
 	padding: 0 10px;
-	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-button-dimension)) / 2);
+	margin-left: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
 	border: 0;
 	border-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
+	box-shadow: var(--small-btn-shadow);
 	color: black;
 	background: white;
 	cursor: pointer;
 }
-.export-button svg {
+.tab-btn svg {
 	font-size: 15px;
 	margin-right: 6px;
 }
-.export-button:active {
+.tab-btn:active {
 	color: white;
 	background: #888;
 }
-.export-button.disabled {
+.tab-btn.disabled {
 	opacity: 0.4;
 	box-shadow: none;
 	pointer-events: none;
@@ -420,8 +456,9 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 
 .resize-toggle-container {
 	display: flex;
+	margin-left: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
 	border-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
+	box-shadow: var(--small-btn-shadow);
 	overflow: hidden;
 }
 
@@ -429,8 +466,8 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--small-button-dimension);
-	width: calc(var(--small-button-dimension) + 2px);
+	height: var(--small-btn-dimension);
+	width: calc(var(--small-btn-dimension) + 2px);
 	font-size: 17px;
 	padding: 0;
 	border: 0;
@@ -506,7 +543,7 @@ input[name="result-size"]:checked + .resize-toggle {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: var(--small-button-dimension);
+	height: var(--small-btn-dimension);
 	font-size: 13px;
 	padding: 0 10px;
 	margin-right: 7px;

@@ -1,0 +1,414 @@
+---
+title: "Web"
+short: "web"
+version: 1.0.0
+
+languages: [
+{
+name: "HTML",
+short: "html",
+config: true
+},
+{
+name: "CSS",
+short: "css"
+},
+{
+name: "JavaScript",
+short: "js",
+config: true
+}
+]
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	{% include head.html %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/xml/xml.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.1/mode/javascript/javascript.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/css/css.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/htmlmixed/htmlmixed.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/emmet-codemirror@1.2.5/dist/emmet.min.js"></script>
+
+	<style>:root {--gradient: #eaecc6, #2bc0e4;}</style>
+</head>
+
+<body class="{{ page.title | downcase }}-body">
+	{% include nav.html %}
+
+	<div class="editor-content">
+		<div class="half code-half">
+			<div class="box-cycler-btn"><i class="fas fa-sync-alt"></i>Cycle Editors</div>
+
+			<div class="multi-code-positioner layers">
+				{%- assign languages = page.languages | reverse %}
+				{%- for lang in languages %}
+				<div class="code-box {{ lang.short }}">
+					<div class="tab">
+						<img class="lang-icon" src="{{ site.baseurl }}/icons/languages/{{ lang.short }}.svg">
+						<span class="tab-title">{{ lang.name }}</span>
+						{%- if lang.config %}
+						<button class="config-btn"><i class="fas fa-tools"></i></button>
+						{%- endif %}
+					</div>
+					<textarea id="{{ lang.short }}-editor"></textarea>
+				</div>
+				{%- endfor %}
+			</div>
+		</div>
+
+		<div class="half result-half">
+			<div class="result-container desktop-result">
+				<div class="tab">
+					<span class="tab-title iconless-tab-title">Result</span>
+					<div class="result-btn-container">
+						<a class="tab-btn export-btn disabled" download="KokomoExport.html"><i class="fas fa-download"></i>Export</a>
+						<div class="resize-toggle-container">
+							<input type="radio" name="result-size" id="desktop-size" autocomplete="off" checked>
+							<label class="resize-toggle" for="desktop-size"><i class="fas fa-expand"></i></label>
+
+							<input type="radio" name="result-size" id="mobile-size" autocomplete="off">
+							<label class="resize-toggle" for="mobile-size"><i class="fas fa-mobile-alt"></i></label>
+						</div>
+					</div>
+				</div>
+				<iframe id="result"></iframe>
+				<div class="result-zoom-container">
+					<i class="fas fa-search-plus"></i>
+
+					<input type="radio" name="result-zoom" id="zoom1" autocomplete="off" checked>
+					<label class="zoom-toggle" for="zoom1">1x</label>
+
+					<input type="radio" name="result-zoom" id="zoom2" autocomplete="off">
+					<label class="zoom-toggle" for="zoom2">2x</label>
+
+					<input type="radio" name="result-zoom" id="zoom3" autocomplete="off">
+					<label class="zoom-toggle" for="zoom3">3x</label>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="body-block"></div>
+
+	<!-- HTML Configuration -->
+	<div class="config-dialogue html-config">
+		<div class="tab">
+			<span class="tab-title iconless-tab-title">HTML Configuration</span>
+		</div>
+		<div class="config-content">
+			<span>Custom Metadata/Stylesheets:</span>
+			<textarea id="head"></textarea>
+			<div class="preset-container metadata-presets">
+				<button class="preset" id="charset-preset"><i class="fas fa-plus"></i>Common charset</button>
+				<button class="preset" id="viewport-preset"><i class="fas fa-plus"></i>Common viewport</button>
+			</div>
+			<button class="funky-btn save-close">Save & Close</button>
+		</div>
+	</div>
+
+	<!-- JS Configuration -->
+	<div class="config-dialogue js-config">
+		<div class="tab">
+			<span class="tab-title iconless-tab-title">Javascript Configuration</span>
+		</div>
+		<div class="config-content">
+			<span>Custom Plugins:</span>
+			<textarea id="plugins"></textarea>
+			<div class="preset-container plugin-presets">
+				<button class="preset" id="jquery-preset"><i class="fas fa-plus"></i>jQuery</button>
+				<button class="preset" id="react-preset"><i class="fas fa-plus"></i>React</button>
+				<button class="preset" id="angular-preset"><i class="fas fa-plus"></i>Angular</button>
+				<button class="preset" id="vue-preset"><i class="fas fa-plus"></i>Vue</button>
+				<button class="preset" id="bootstrap-preset"><i class="fas fa-plus"></i>Bootstrap</button>
+			</div>
+			<button class="funky-btn save-close">Save & Close</button>
+		</div>
+	</div>
+
+	<script src="{{ site.baseurl }}/js/main.js"></script>
+	<script>
+		// Main editors
+		var html = CodeMirror.fromTextArea(document.getElementById("html-editor"), {
+			mode: "htmlmixed",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			matchTags: {bothTags: true},
+			extraKeys: {"Ctrl-J": "toMatchingTag"},
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			scrollPastEnd: true,
+			autoRefresh: true
+		});
+		emmetCodeMirror(html, {
+			"Tab": "emmet.expand_abbreviation_with_tab",
+			"Cmd-Alt-B": "emmet.balance_outward"
+		});
+
+		var css = CodeMirror.fromTextArea(document.getElementById("css-editor"), {
+			mode: "text/css",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			scrollPastEnd: true,
+			autoRefresh: true
+		});
+
+		var js = CodeMirror.fromTextArea(document.getElementById("js-editor"), {
+			mode: "text/js",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			scrollPastEnd: true,
+			autoRefresh: true
+		});
+
+
+
+		// Config editors
+		var head = CodeMirror.fromTextArea(document.getElementById("head"), {
+			mode: "htmlmixed",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			autoRefresh: true
+		});
+		
+		var plugins = CodeMirror.fromTextArea(document.getElementById("plugins"), {
+			mode: "htmlmixed",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			autoRefresh: true
+		});
+
+
+
+		// Initialization
+		$(document).ready(function() {
+			$(".CodeMirror").each((i, e) => e.CodeMirror.refresh());
+		/* 	html.setValue(localStorage.getItem("currentHtml"));
+			css.setValue(localStorage.getItem("currentCss"));
+			js.setValue(localStorage.getItem("currentJs"));
+			head.setValue(localStorage.getItem("currentHead"));
+			plugins.setValue(localStorage.getItem("currentPlugins")); */
+		});
+
+
+
+		// Update result
+		$(".run").click(function() {
+			result = document.getElementById("result");
+			result = result.contentWindow || result.contentDocument.document || result.contentDocument;
+			meat = `<!DOCTYPE html>
+					<html>
+
+					<head>
+						${head.getValue()}
+						<style>
+						${css.getValue()}
+						</style>
+					</head>
+
+					<body>
+						${html.getValue()}
+						${plugins.getValue()}
+						<script>
+						${js.getValue()}
+						</scr`+`ipt>
+					</body>
+
+					</html>`;
+			result.document.open();
+			result.document.write(meat);
+			result.document.close();
+			$("#result").contents().find("body").css("transform-origin", "left top");
+			zoom();
+		});
+
+
+
+		// Save editor values
+		$(".save").click(function() {
+			alert("Heads up: Proper saving hasn't been implemented yet.");
+		/* 	localStorage.setItem("currentHtml", html.getValue());
+			localStorage.setItem("currentCss", css.getValue());
+			localStorage.setItem("currentJs", js.getValue());
+			localStorage.setItem("currentHead", head.getValue());
+			localStorage.setItem("currentPlugins", plugins.getValue());
+			$(".save").addClass("saved");
+			$(".save svg").attr("class", "fas fa-check");
+			setTimeout(function() {
+				$(".save").removeClass("saved");
+				$(".save svg").attr("class", "far fa-save");
+			}, 700); */
+		});
+
+
+
+		// Layout settings
+		$("input[name=\"layout\"]").change(function() {
+			var layout = $(this).attr("id").replace("-layout", "");
+
+			$(".multi-code-positioner").attr("class", `multi-code-positioner ${layout}`);
+
+			switch (layout) {
+				case "layers":
+					notBoxes();
+					if ($(".multi-code-positioner").find(".gutter").length > 0) stackSplit.destroy();
+					break;
+
+				case "stack":
+					notBoxes();
+					stackSplit = Split([".js", ".css", ".html"], {
+						direction: 'vertical',
+						minSize: 80,
+						snapOffset: 0,
+					});
+					break;
+
+				case "boxes":
+					if ($(".multi-code-positioner").find(".gutter").length > 0) stackSplit.destroy();
+					$(".box-cycler-btn").css("display", "flex");
+					break;
+			}
+		});
+
+		function notBoxes() {
+			$(".multi-code-positioner").prepend($(".js"), $(".css"), $(".html"));
+			$(".code-box").css({
+				"animation": "none",
+				"opacity": "1"
+			});
+			$(".box-cycler-btn").css("display", "none");
+		}
+
+		$(".box-cycler-btn").click(function() {
+			function rotate(deg) {
+				$(".box-cycler-btn svg").css("transform", "rotate(" + deg + "deg)");
+				setTimeout(function() {if (deg < 180) rotate(deg + 5)});
+			}
+			rotate(0);
+			$(this).find("svg").css("transform", "rotate(0deg)");
+			$(".multi-code-positioner").prepend($(".code-box:last"));
+			$(".code-box").css({"animation": "none", "opacity": "1"});
+		});
+
+
+
+		// Show/hide config
+		$(".config-btn").click(function() {
+			var lang = $(this).closest(".code-box").attr("class").split(" ")[1];
+			var configEditor = window[$(`.${lang}-config`).find("textarea").attr("id")];
+
+			$(".body-block").show();
+			$(`.${lang}-config`).show();
+
+			configEditor.refresh();
+			configEditor.focus();
+			configEditor.setCursor(configEditor.lineCount(), 0);
+		});
+
+
+
+		// Head presets
+		$(".preset").click(function() {
+			var that = $(this);
+
+			if ($(this).closest(".config-dialogue").is(".html-config")) {
+				var metas = [
+					{
+						name: "charset",
+						text: "<meta charset=\"UTF-8\">"
+					},
+					{
+						name: "viewport",
+						text: "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
+					}
+				];
+
+				for (let meta of metas) {
+					if (that.is(`#${meta.name}-preset`)) head.replaceSelection(meta.text);
+				}
+
+				head.focus();
+				head.setCursor(head.lineCount(), 0);
+			}
+
+			if ($(this).closest(".config-dialogue").is(".js-config")) {
+				var presets = [
+					{
+						name: "jquery",
+						src: "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
+					},
+					{
+						name: "react",
+						src: "https://cdnjs.cloudflare.com/ajax/libs/react/17.0.1/umd/react.production.min.js"
+					},
+					{
+						name: "vue",
+						src: "https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.11/vue.min.js"
+					},
+					{
+						name: "angular",
+						src: "https://cdnjs.cloudflare.com/ajax/libs/angular/10.2.1/core.umd.min.js"
+					}
+				];
+
+				for (let preset of presets) {
+					if (that.is(`#${preset.name}-preset`)) plugins.replaceSelection("<script src=\"" + preset.src + "\"></scr" + "ipt>");
+				}
+
+				if ($(this).is("#bootstrap-preset")) {
+					plugins.replaceSelection("<script src=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/js/bootstrap.min.js\"></scr" + "ipt>");
+					head.replaceSelection("<link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.3/css/bootstrap.min.css\">");
+				}
+
+				plugins.focus();
+				plugins.setCursor(plugins.lineCount(), 0);
+			}
+		});
+
+
+
+		// Export file
+		$(".export-btn").click(function() {
+			var meatFormatted = "<!--\n\tUpon export, some styling and configuration filters are applied.\n\tTabs, spaces, new lines, and white space may need to be manually adjusted.\n-->\n" + meat.replaceAll("\t", "");
+			var meatBlob = new Blob([meatFormatted], {type: "text/plain"});
+			$(this).attr("href", URL.createObjectURL(meatBlob));
+		});
+	</script>
+</body>
+
+</html>

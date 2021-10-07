@@ -1,0 +1,61 @@
+<div class="nav">
+	<div class="info-container">
+		<img class="logo" src="{{ site.baseurl }}/icons/logo.svg">
+		<span class="info-title">Welcome to Kokomo!</span>
+		<div class="info-dropdown">
+			<span>Kokomo {{ page.title }} Editor</span>
+			<span>Version {{ page.version }}</span>
+			<span>Made by <a class="funky-link" href="https://github.com/semishawn"><i class="fab fa-github-alt" style="margin-right: 5px;"></i>semishawn</a>
+			</span>
+			<span>Return <a class="funky-link" href="{{ site.baseurl }}/">home</a></span>
+		</div>
+	</div>
+
+	<div class="primary-functions-container">
+		<button class="funky-btn run"><i class="fas fa-running"></i>Run</button>
+		<button class="funky-btn save"><div class="save-icon"><i class="far fa-save"></i></div>Save</button>
+		<button class="funky-btn reset"><i class="fas fa-snowplow"></i>Reset</button>
+	</div>
+
+	<div class="settings">
+		<button class="funky-btn settings-select"><i class="fas fa-cog"></i>Settings</button>
+		<div class="settings-dropdown">
+			{% if page.title == "Web" %}
+			<div class="options layout-options">
+				<input type="radio" name="layout" id="layers-layout" autocomplete="off" checked>
+				<label class="layout" for="layers-layout">
+					<span class="layout-icon layers-icon"><span></span><span></span><span></span></span>
+					Layers
+				</label>
+
+				<input type="radio" name="layout" id="stack-layout" autocomplete="off">
+				<label class="layout" for="stack-layout">
+					<span class="layout-icon stack-icon"><span></span><span></span><span></span></span>
+					Stack
+				</label>
+
+				<input type="radio" name="layout" id="boxes-layout" autocomplete="off">
+				<label class="layout" for="boxes-layout">
+					<span class="layout-icon boxes-icon"><span></span><span></span><span></span></span>
+					Boxes
+				</label>
+			</div>
+
+			<div class="separator"></div>
+			{% endif %}
+
+			<div class="options editor-options">
+				<div class="editor-toggle">
+					<input id="line-wrapping" type="checkbox" autocomplete="off" checked>
+					<label class="flip-btn" for="line-wrapping" data-yes="Yeah" data-no="Nope"></label>
+					<span>Line Wrapping</span>
+				</div>
+				<div class="editor-toggle">
+					<input id="line-numbers" type="checkbox" autocomplete="off" checked>
+					<label class="flip-btn" for="line-numbers" data-yes="Yeah" data-no="Nope"></label>
+					<span>Line Numbers</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

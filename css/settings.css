@@ -28,7 +28,7 @@
 	width: 190px;
 }
 
-.flip-button {
+.flip-btn {
 	position: relative;
 	display: block;
 	height: 32px;
@@ -41,7 +41,7 @@
 	box-sizing: border-box;
 }
 
-.flip-button:before, .flip-button:after {
+.flip-btn:before, .flip-btn:after {
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -57,26 +57,26 @@
 	transition: all 0.4s ease;
 }
 
-.flip-button:before {
+.flip-btn:before {
 	content: attr(data-no);
 	background: #FF3A19;
 }
 
-.flip-button:after {
+.flip-btn:after {
 	content: attr(data-yes);
 	background: #02C66F;
 	transform: rotateY(-180deg);
 }
 
-input[type="checkbox"]:checked + .flip-button:before {transform: rotateY(180deg);}
+input[type="checkbox"]:checked + .flip-btn:before {transform: rotateY(180deg);}
 
-input[type="checkbox"]:checked + .flip-button:after {
+input[type="checkbox"]:checked + .flip-btn:after {
 	transform: rotateY(0);
 	left: 0;
 }
 
-.flip-button:active:before {transform: rotateY(-20deg);}
-input[type="checkbox"]:checked + .flip-button:active:after {transform: rotateY(20deg);}
+.flip-btn:active:before {transform: rotateY(-20deg);}
+input[type="checkbox"]:checked + .flip-btn:active:after {transform: rotateY(20deg);}
 
 .editor-toggle span {
 	margin-left: 8px;

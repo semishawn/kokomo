@@ -37,56 +37,41 @@
 
 
 
-/* web-Editor */
-.web-body .nav {
+/* Regular editor */
+.nav {
 	animation: fadeDown var(--animation-speed) forwards;
 	animation-delay: var(--initial-delay);
 	opacity: 0;
 }
 
-.web-body .code-box {
+.code-box, .result-container, .console-container {
 	animation: fadeUp var(--animation-speed) forwards;
 	opacity: 0;
 }
-.web-body .html {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
-.web-body .css {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 2 * var(--animation-increment));}
-.web-body .js {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 3 * var(--animation-increment));}
 
-.web-body .result-container {
-	animation: fadeUp var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 4 * var(--animation-increment));
-	opacity: 0;
-}
+.code-box {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay));}
 
-.web-body .gutter-horizontal {
-	animation: fadeIn var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 5 * var(--animation-increment));
-	opacity: 0;
-}
+.result-container,
+.console-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
 
-
-
-/* HTML Editor */
-.html-body .nav {
-	animation: fadeDown var(--animation-speed) forwards;
-	animation-delay: var(--initial-delay);
-	opacity: 0;
-}
-
-.html-body .html {
-	animation: fadeUp var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay));
-	opacity: 0;
-}
-
-.html-body .result-container {
-	animation: fadeUp var(--animation-speed) forwards;
-	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));
-	opacity: 0;
-}
-
-.html-body .gutter-horizontal {
+.gutter-horizontal {
 	animation: fadeIn var(--animation-speed) forwards;
 	animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 2 * var(--animation-increment));
 	opacity: 0;
 }
+
+
+
+/* Web editor */
+.web-body .code-container {
+	animation: none;
+	opacity: 1;
+}
+
+.web-body .html {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
+.web-body .css {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 2 * var(--animation-increment));}
+.web-body .js {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 3 * var(--animation-increment));}
+
+.web-body .result-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 4 * var(--animation-increment));}
+
+.web-body .gutter-horizontal {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + 5 * var(--animation-increment));}

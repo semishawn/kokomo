@@ -11,8 +11,8 @@
 }
 .layout:hover {opacity: 1;}
 input[name="layout"]:checked + .layout {
-	opacity: 1;
 	background: #eee;
+	opacity: 1;
 }
 
 .layout-icon {
@@ -35,7 +35,7 @@ input[name="layout"]:checked + .layout {
 
 /* Gutters */
 :root {--gutter-margin: 5px;}
-.code-container .gutter-horizontal {
+.multi-code-positioner .gutter-horizontal {
 	height: 100%;
 	width: var(--gutter-margin) !important;
 	margin: 0 var(--gutter-margin);
@@ -44,7 +44,7 @@ input[name="layout"]:checked + .layout {
 	cursor: col-resize;
 	z-index: 990;
 }
-.code-container .gutter-vertical {
+.multi-code-positioner .gutter-vertical {
 	height: var(--gutter-margin) !important;
 	width: calc(100% - 2 * var(--gutter-margin));
 	margin: var(--gutter-margin) 0;
@@ -67,10 +67,8 @@ input[name="layout"]:checked + .layout {
 .layers .tab {cursor: grab;}
 
 .layers .code-box {
-	position: absolute;
 	height: calc(100% - 2 * var(--tab-height) + 8px);
 	width: calc(100% - 2 * var(--tab-height) + 8px);
-	z-index: 1;
 }
 .layers .html {
 	bottom: 0;
@@ -162,26 +160,30 @@ input[name="layout"]:checked + .layout {
 	width: 100%;
 }
 
-.box-cycler {
+.box-cycler-btn {
 	position: absolute;
-	top: calc(var(--half-padding) + (var(--tab-height) - var(--small-button-dimension)) / 2);
+	top: calc(var(--half-padding) + (var(--tab-height) - var(--small-btn-dimension)) / 2);
 	display: none;
 	align-items: center;
-	height: var(--small-button-dimension);
+	height: var(--small-btn-dimension);
 	font-size: 13px;
 	padding: 0 10px;
 	border: 0;
 	border-radius: var(--small-radius);
-	box-shadow: var(--small-button-shadow);
+	box-shadow: var(--small-btn-shadow);
 	color: black;
 	background: white;
 	cursor: pointer;
 	user-select: none;
 	z-index: 997;
 }
-.box-cycler svg {
+.box-cycler-btn svg {
 	font-size: 15px;
 	margin-right: 6px;
+}
+.box-cycler-btn:active {
+	color: white;
+	background: #888;
 }
 
 

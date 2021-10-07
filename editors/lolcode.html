@@ -1,0 +1,69 @@
+---
+title: "LOLCODE"
+extension: "lol"
+bin: "lci"
+version: 1.0.0
+---
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	{% include head.html %}
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.0/mode/javascript/javascript.min.js"></script>
+
+	<style>
+		:root {--gradient: #F4E2D8, #BA5370;}
+		.log-id {color: pink;}
+	</style>
+</head>
+
+<body class="regular-body {{ page.extension }}-body">
+	{% include nav.html %}
+
+	<div class="editor-content">
+		<div class="half code-half">
+			<div class="code-box">
+				<div class="tab">
+					<img class="lang-icon" src="{{ site.baseurl }}/icons/languages/{{ page.extension }}.png">
+					<span class="tab-title">{{ page.title }}</span>
+				</div>
+				<textarea id="{{ page.extension }}-editor"></textarea>
+			</div>
+		</div>
+
+		<div class="half result-half">
+			<div class="console-container">
+				<div class="tab">
+					<span class="tab-title iconless-tab-title">Console</span>
+					<div class="result-btn-container">
+						<button class="tab-btn console-clear-btn"><i class="fas fa-trash-alt"></i>Clear Console</button>
+					</div>
+				</div>
+				<div id="console"></div>
+			</div>
+		</div>
+	</div>
+
+	<script src="{{ site.baseurl }}/js/main.js"></script>
+	<script>
+		// CodeMirror
+		var {{ page.extension }} = CodeMirror.fromTextArea(document.getElementById("{{ page.extension }}-editor"), {
+			mode: "text/javascript",
+			theme: "kokomo-syntax",
+			lineWrapping: true,
+			lineNumbers: true,
+			matchBrackets: true,
+			autoCloseBrackets: true,
+			smartIndent: true,
+			tabSize: 4,
+			indentUnit: 4,
+			indentWithTabs: true,
+			scrollPastEnd: true,
+			autoRefresh: true
+		});
+	</script>
+	{% include run-js.html %}
+</body>
+
+</html>
