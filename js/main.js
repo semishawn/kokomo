@@ -15,9 +15,11 @@ $(".logo").click(() => $(".info-dropdown").toggleClass("show"));
 $(document).click(function(e) {
 	if (!$(e.target).closest(".settings").length) $(".settings-dropdown").removeClass("show");
 	if (!$(e.target).closest(".info-container").length) $(".info-dropdown").removeClass("show");
+	if (!$(e.target).closest(".samples-btn").length) $(".samples-dropdown").removeClass("show");
 	$("#result").contents().click(function() {
 		$(".info-dropdown").removeClass("show");
 		$(".settings-dropdown").removeClass("show");
+		$(".samples-dropdown").removeClass("show");
 	});
 });
 
@@ -26,6 +28,24 @@ $(document).click(function(e) {
 // Export functionality
 $(".run").click(function() {
 	$(".export-btn").removeClass("disabled");
+});
+
+
+
+// Save editor values
+$(".save").click(function() {
+	alert("Heads up: Proper saving hasn't been implemented yet.");
+/* 	localStorage.setItem("currentHtml", html.getValue());
+	localStorage.setItem("currentCss", css.getValue());
+	localStorage.setItem("currentJs", js.getValue());
+	localStorage.setItem("currentHead", head.getValue());
+	localStorage.setItem("currentPlugins", plugins.getValue());
+	$(".save").addClass("saved");
+	$(".save svg").attr("class", "fas fa-check");
+	setTimeout(function() {
+		$(".save").removeClass("saved");
+		$(".save svg").attr("class", "far fa-save");
+	}, 700); */
 });
 
 
@@ -52,22 +72,6 @@ $(".code-box").click(function() {
 
 
 
-// Change result size
-$("input[name=\"result-size\"]").change(function() {
-	if ($(this).is("#mobile-size")) $(".result-container").addClass("mobile-result");
-	else $(".result-container").removeClass("mobile-result");
-});
-
-// Change result zoom
-$("input[name=\"result-zoom\"]").change(function() {zoom()});
-function zoom() {
-	if ($("#zoom1").is(":checked")) $("#result").css({"transform": "scale(1)"});
-	if ($("#zoom2").is(":checked")) $("#result").css({"transform": "scale(2)"});
-	if ($("#zoom3").is(":checked")) $("#result").css({"transform": "scale(3)"});
-}
-
-
-
 // Settings
 $(".settings-select").click(() => $(".settings-dropdown").toggleClass("show"));
 
@@ -86,6 +90,13 @@ $("#line-numbers").change(function() {
 $(".save-close").click(function() {
 	$(".body-block").hide();
 	$(".config-dialogue").hide();
+});
+
+
+
+// Toggle samples dropdown
+$(".samples-btn").click(function() {
+	$(".samples-dropdown").toggleClass("show");
 });
 
 

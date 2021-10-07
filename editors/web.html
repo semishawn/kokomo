@@ -50,7 +50,9 @@ config: true
 						<img class="lang-icon" src="{{ site.baseurl }}/icons/languages/{{ lang.short }}.svg">
 						<span class="tab-title">{{ lang.name }}</span>
 						{%- if lang.config %}
-						<button class="config-btn"><i class="fas fa-tools"></i></button>
+						<div class="result-btn-container">
+							<button class="tab-btn config-btn"><i class="fas fa-tools"></i></button>
+						</div>
 						{%- endif %}
 					</div>
 					<textarea id="{{ lang.short }}-editor"></textarea>
@@ -259,24 +261,6 @@ config: true
 
 
 
-		// Save editor values
-		$(".save").click(function() {
-			alert("Heads up: Proper saving hasn't been implemented yet.");
-		/* 	localStorage.setItem("currentHtml", html.getValue());
-			localStorage.setItem("currentCss", css.getValue());
-			localStorage.setItem("currentJs", js.getValue());
-			localStorage.setItem("currentHead", head.getValue());
-			localStorage.setItem("currentPlugins", plugins.getValue());
-			$(".save").addClass("saved");
-			$(".save svg").attr("class", "fas fa-check");
-			setTimeout(function() {
-				$(".save").removeClass("saved");
-				$(".save svg").attr("class", "far fa-save");
-			}, 700); */
-		});
-
-
-
 		// Layout settings
 		$("input[name=\"layout\"]").change(function() {
 			var layout = $(this).attr("id").replace("-layout", "");
@@ -324,6 +308,22 @@ config: true
 			$(".multi-code-positioner").prepend($(".code-box:last"));
 			$(".code-box").css({"animation": "none", "opacity": "1"});
 		});
+
+
+
+		// Change result size
+		$("input[name=\"result-size\"]").change(function() {
+			if ($(this).is("#mobile-size")) $(".result-container").addClass("mobile-result");
+			else $(".result-container").removeClass("mobile-result");
+		});
+
+		// Change result zoom
+		$("input[name=\"result-zoom\"]").change(function() {zoom()});
+		function zoom() {
+			if ($("#zoom1").is(":checked")) $("#result").css({"transform": "scale(1)"});
+			if ($("#zoom2").is(":checked")) $("#result").css({"transform": "scale(2)"});
+			if ($("#zoom3").is(":checked")) $("#result").css({"transform": "scale(3)"});
+		}
 
 
 

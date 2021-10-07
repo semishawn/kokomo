@@ -1,4 +1,10 @@
 <script>
+	function log(msg) {
+		if (!msg.startsWith("\n")) msg.replace(/^\\n/, "");
+		if (!msg.endsWith("\n")) msg += "\n";
+		$("#console").append("<span class=\"log-id\">$ {{ page.bin }} main.{{ page.extension }}</span>", "\n", msg, "\n");
+	}
+
 	// Run backend binary file
 	$(".run").click(function() {
 		$.ajax({
@@ -11,8 +17,11 @@
 			},
 			url: "https://kokomo-backend.herokuapp.com/shell.php",
 			success: function(xhr) {
-				if (!xhr.endsWith("\n")) xhr += "\n";
-				$("#console").append("<span class=\"log-id\">$ {{ page.bin }} main.{{ page.extension }}</span>", "\n", xhr, "\n");
+				log(xhr);
+			},
+			error: function() {
+				log("<span class=\"log-error\">Error, possible loop</span>");
+
 			}
 		});
 	});

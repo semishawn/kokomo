@@ -367,7 +367,7 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	box-sizing: border-box;
 }
 
-#console::-webkit-scrollbar {background: red;}
+.log-error {color: #f55;}
 
 
 
@@ -394,28 +394,6 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	user-select: none;
 }
 .iconless-tab-title {margin-left: 15px;}
-
-.config-btn {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: var(--small-btn-dimension);
-	width: var(--small-btn-dimension);
-	font-size: 16px;
-	padding: 0;
-	margin-left: auto;
-	margin-right: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
-	border: 0;
-	border-radius: var(--small-radius);
-	box-shadow: var(--small-btn-shadow);
-	color: black;
-	background: white;
-	cursor: pointer;
-}
-.config-btn:active {
-	color: white;
-	background: #888;
-}
 
 .result-btn-container {
 	display: flex;
@@ -454,6 +432,17 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	user-select: none;
 }
 
+.config-btn {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: var(--small-btn-dimension);
+	width: var(--small-btn-dimension);
+	font-size: 16px;
+	padding: 0;
+}
+.config-btn svg {margin: 0;}
+
 .resize-toggle-container {
 	display: flex;
 	margin-left: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
@@ -476,6 +465,35 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	cursor: pointer;
 }
 input[name="result-size"]:checked + .resize-toggle {
+	color: white;
+	background: #888;
+}
+
+.samples-dropdown {
+	position: absolute;
+	top: calc(var(--tab-height) + (var(--tab-height) - var(--small-btn-dimension)) / 2);
+	right: calc((var(--tab-height) - var(--small-btn-dimension)) / 2);
+	display: none;
+	flex-direction: column;
+	border-radius: var(--small-radius);
+	box-shadow: var(--small-btn-shadow);
+	background: white;
+	overflow: hidden;
+	z-index: 999;
+}
+
+.sample-option {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	height: var(--small-btn-dimension);
+	width: 100%;
+	font-size: 13px;
+	padding: 0 10px;
+	cursor: pointer;
+	box-sizing: border-box;
+}
+.sample-option:hover {
 	color: white;
 	background: #888;
 }
