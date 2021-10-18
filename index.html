@@ -9,65 +9,97 @@
 
 	<style>
 		body {
-			flex-direction: row;
 			justify-content: center;
 			align-items: center;
 			background: linear-gradient(135deg, #C6FFDD, #FBD786, #f7797d);
 		}
 
-		.editor-btn {
+		.homepage-logo {
+			height: 120px;
+			animation: rocking 2s ease-in-out infinite;
+		}
+
+		@keyframes rocking {
+			0% {transform: rotate(-15deg);}
+			50% {transform: rotate(15deg);}
+			100% {transform: rotate(-15deg);}
+		}
+
+		span {
+			font-size: 50px;
+			font-weight: 700;
+			font-style: italic;
+			margin: 25px 0;
+		}
+
+		.editor-link-container {
+			display: grid;
+			grid-template-columns: repeat(2, 1fr);
+			grid-template-rows: auto;
+			gap: 20px;
+		}
+		
+		.editor-link {
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
-			height: 20%;
-			width: 20%;
-			margin: 10px;
+			height: 150px;
+			width: 200px;
+			font-size: 15px;
+			font-weight: 500;
+			border: 4px solid black;
 			border-radius: var(--main-radius);
-			color: grey;
-			background: linear-gradient(var(--tab-gradient));
+			color: black;
+			background: white;
 			box-shadow: var(--main-shadow);
 			text-decoration: none;
 			transition: all 0.1s;
+			box-sizing: border-box;
 		}
-		.editor-btn:hover {transform: scale(1.03);}
+		.editor-link:hover {transform: scale(1.05);}
 
-		.editor-img-container {
+		.editor-icon-container {
 			height: 40%;
-			margin-bottom: 10px;
+			margin-bottom: 6%;
 		}
+		.web-link .editor-icon-container {height: 30%;}
 
-		.editor-btn img {height: 100%;}
+		.editor-link img {height: 100%;}
 	</style>
 </head>
 
 <body>
-	<a class="editor-btn" href="editors/web.html">
-		<div class="editor-img-container">
-			<img src="icons/languages/html.svg">
-			<img src="icons/languages/css.svg">
-			<img src="icons/languages/js.svg">
-		</div>
-		Web Editor
-	</a>
-	<a class="editor-btn" href="editors/html.html">
-		<div class="editor-img-container">
-			<img src="icons/languages/html.svg">
-		</div>
-		HTML Editor
-	</a>
-	<a class="editor-btn" href="editors/lolcode.html">
-		<div class="editor-img-container">
-			<img src="icons/languages/lol.png">
-		</div>
-		LOLCODE Editor
-	</a>
-	<a class="editor-btn" href="editors/befunge.html">
-		<div class="editor-img-container">
-			<img src="icons/languages/bf.png">
-		</div>
-		Befunge Editor
-	</a>
+	<img class="homepage-logo" src="img/logo.svg">
+	<span>{ Kokomo Language Editors }</span>
+	<div class="editor-link-container">
+		<a class="editor-link web-link" href="editors/web.html">
+			<div class="editor-icon-container">
+				<img src="img/languages/html.svg">
+				<img src="img/languages/css.svg">
+				<img src="img/languages/js.svg">
+			</div>
+			Web Editor
+		</a>
+		<a class="editor-link" href="editors/html.html">
+			<div class="editor-icon-container">
+				<img src="img/languages/html.svg">
+			</div>
+			HTML Editor
+		</a>
+		<a class="editor-link" href="editors/lolcode.html">
+			<div class="editor-icon-container">
+				<img src="img/languages/lol.png">
+			</div>
+			LOLCODE Editor
+		</a>
+		<a class="editor-link" href="editors/befunge.html">
+			<div class="editor-icon-container">
+				<img src="img/languages/bf.png">
+			</div>
+			Befunge-93 Editor
+		</a>
+	</div>
 </body>
 
 </html>

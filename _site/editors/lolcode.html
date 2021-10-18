@@ -6,19 +6,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Kokomo - LOLCODE Editor</title>
-<link rel="icon" type="image/png" href="/icons/favicon.png">
+<link rel="icon" type="image/png" href="/kokomo/img/favicon.png">
 
 <!-- Fonts -->
-<link rel="preconnect" href="https://fonts.gstatic.com">
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/tonsky/FiraCode@1.207/distr/fira_code.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Fira+Mono:wght@400;500;700&family=IBM+Plex+Sans:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 
 <!-- CSS -->
-<link rel="stylesheet" href="/css/main.css">
-<link rel="stylesheet" href="/css/animations.css">
-<link rel="stylesheet" href="/css/settings.css">
-<link rel="stylesheet" href="/css/layouts.css">
-<link rel="stylesheet" href="/css/kokomo-syntax.css">
+<link rel="stylesheet" href="/kokomo/css/main.css">
+<link rel="stylesheet" href="/kokomo/css/animations.css">
+<link rel="stylesheet" href="/kokomo/css/settings.css">
+<link rel="stylesheet" href="/kokomo/css/layouts.css">
+<link rel="stylesheet" href="/kokomo/css/kokomo-syntax.css">
 
 <!-- Plugins -->
 <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
@@ -47,14 +47,14 @@
 <body class="regular-body lol-body">
 	<div class="nav">
 	<div class="info-container">
-		<img class="logo" src="/icons/logo.svg">
+		<img class="logo" src="/kokomo/img/logo.svg">
 		<span class="info-title">Welcome to Kokomo!</span>
 		<div class="info-dropdown">
 			<span>Kokomo LOLCODE Editor</span>
 			<span>Version 1.0.0</span>
 			<span>Made by <a class="funky-link" href="https://github.com/semishawn"><i class="fab fa-github-alt" style="margin-right: 5px;"></i>semishawn</a>
 			</span>
-			<span>Return <a class="funky-link" href="/">home</a></span>
+			<span>Return <a class="funky-link" href="/kokomo/">home</a></span>
 		</div>
 	</div>
 
@@ -89,7 +89,7 @@
 		<div class="half code-half">
 			<div class="code-box">
 				<div class="tab">
-					<img class="lang-icon" src="/icons/languages/lol.png">
+					<img class="lang-icon" src="/kokomo/img/languages/lol.png">
 
 					<span class="tab-title">LOLCODE</span>
 
@@ -107,20 +107,20 @@
 		</div>
 
 		<div class="half result-half">
-			<div class="console-container">
+			<div class="terminal-container">
 				<div class="tab">
-					<span class="tab-title iconless-tab-title">Console</span>
+					<span class="tab-title iconless-tab-title">Terminal</span>
 					<div class="result-btn-container">
-						<button class="tab-btn console-clear-btn"><i class="far fa-trash-alt"></i>Clear Console</button>
+						<button class="tab-btn terminal-clear-btn"><i class="far fa-trash-alt"></i>Clear Terminal</button>
 					</div>
 				</div>
-				<div id="console"></div>
+				<div id="terminal"><div class="log-waiting"></div></div>
 			</div>
 		</div>
 	</div>
 
-	<script src="/js/main.js"></script>
-	<script src="/js/lolcode.js"></script>
+	<script src="/kokomo/js/main.js"></script>
+	<script src="/kokomo/js/lolcode.js"></script>
 	<script>
 		// CodeMirror
 		var lol = CodeMirror.fromTextArea(document.getElementById("lol-editor"), {
@@ -137,56 +137,29 @@
 			scrollPastEnd: true,
 			autoRefresh: true
 		});
-
-
-
-		// Specific samples
-		$(".sample-option").click(function() {
-			var sample = $(this).attr("data-sample");
-			switch (sample) {
-				case "visible":
-					sampleCode = `HAI 1.3
-	VISIBLE \"Hello world!\"
-KTHXBYE`;
-					break;
-				case "increment":
-					sampleCode = `HAI 1.3
-	I HAS A var ITZ 0
-	IM IN YR loop UPPIN YR var TIL BOTH SAEM var AN 10
-		VISIBLE SUM OF var AN 1
-	IM OUTTA YR loop
-KTHXBYE`;
-					break;
-				case "exponent":
-					sampleCode = `HAI 1.3
-	HOW IZ I exponentFunction YR base AN YR exp
-		I HAS A index ITZ 0
-		I HAS A total ITZ 1
-
-		IM IN YR loop UPPIN YR index TIL BOTH SAEM index AN exp
-			total R PRODUKT OF total AN base
-		IM OUTTA YR loop
-
-		FOUND YR total
-	IF U SAY SO
-		
-	VISIBLE I IZ exponentFunction YR 2 AN YR 4 MKAY
-KTHXBYE`;
-					break;
-			}
-			sampleCode.substring(1);
-			lol.setValue(sampleCode);
-		});
 	</script>
 	<script>
+	// Specific samples
+	$(".sample-option").click(function() {
+		var sampleCode = samples[$(this).attr("data-sample")].replace(/\n/, "").replace(/\n$/, "");
+		lol.setValue(sampleCode);
+	});
+
+
+
+	// Log to terminal function
 	function log(msg) {
-		if (!msg.startsWith("\n")) msg.replace(/^\\n/, "");
-		if (!msg.endsWith("\n")) msg += "\n";
-		$("#console").append("<span class=\"log-id\">$ lci main.lol</span>", "\n", msg, "\n");
+		$("#terminal").html(msg);
 	}
+
+
 
 	// Run backend binary file
 	$(".run").click(function() {
+		$("#terminal").html("");
+		$("#terminal").append("<div class=\"log-waiting\"></div>");
+		$(".log-waiting").show();
+
 		$.ajax({
 			type: "GET",
 			data: {
@@ -197,14 +170,22 @@ KTHXBYE`;
 			},
 			url: "https://kokomo-backend.herokuapp.com/shell.php",
 			success: function(xhr) {
-				log(xhr);
+				log($.trim(xhr));
 			},
 			error: function() {
-				log("<span class=\"log-error\">Error, possible loop</span>");
-			}
+				log("<span class=\"log-error\">Error: shell timed out</span>");
+			},
+			timeout: 5000
 		});
-		$("#console").scrollTop($("#console").outerHeight());
 	});
+
+
+
+	setInterval(function() {
+		var that = $(".log-waiting");
+		if (that.text().length < 3) that.text(that.text() + ".");
+		else that.text("");
+	}, 300);
 </script>
 </body>
 

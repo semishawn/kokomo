@@ -47,7 +47,7 @@ config: true
 				{%- for lang in languages %}
 				<div class="code-box {{ lang.short }}">
 					<div class="tab">
-						<img class="lang-icon" src="{{ site.baseurl }}/icons/languages/{{ lang.short }}.svg">
+						<img class="lang-icon" src="{{ site.baseurl }}/img/languages/{{ lang.short }}.svg">
 						<span class="tab-title">{{ lang.name }}</span>
 						{%- if lang.config %}
 						<div class="result-btn-container">
@@ -278,7 +278,7 @@ config: true
 					stackSplit = Split([".js", ".css", ".html"], {
 						direction: 'vertical',
 						minSize: 80,
-						snapOffset: 0,
+						snapOffset: 0
 					});
 					break;
 

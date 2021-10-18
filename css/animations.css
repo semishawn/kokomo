@@ -44,7 +44,7 @@
 	opacity: 0;
 }
 
-.code-box, .result-container, .console-container {
+.code-box, .result-container, .terminal-container {
 	animation: fadeUp var(--animation-speed) forwards;
 	opacity: 0;
 }
@@ -52,7 +52,7 @@
 .code-box {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay));}
 
 .result-container,
-.console-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
+.terminal-container {animation-delay: calc(var(--initial-delay) + var(--after-nav-delay) + var(--animation-increment));}
 
 .gutter-horizontal {
 	animation: fadeIn var(--animation-speed) forwards;

@@ -1,12 +1,25 @@
 <script>
+	// Specific samples
+	$(".sample-option").click(function() {
+		var sampleCode = samples[$(this).attr("data-sample")].replace(/\n/, "").replace(/\n$/, "");
+		{{ page.extension }}.setValue(sampleCode);
+	});
+
+
+
+	// Log to terminal function
 	function log(msg) {
-		if (!msg.startsWith("\n")) msg.replace(/^\\n/, "");
-		if (!msg.endsWith("\n")) msg += "\n";
-		$("#console").append("<span class=\"log-id\">$ {{ page.bin }} main.{{ page.extension }}</span>", "\n", msg, "\n");
+		$("#terminal").html(msg);
 	}
+
+
 
 	// Run backend binary file
 	$(".run").click(function() {
+		$("#terminal").html("");
+		$("#terminal").append("<div class=\"log-waiting\"></div>");
+		$(".log-waiting").show();
+
 		$.ajax({
 			type: "GET",
 			data: {
@@ -17,12 +30,20 @@
 			},
 			url: "https://kokomo-backend.herokuapp.com/shell.php",
 			success: function(xhr) {
-				log(xhr);
+				log($.trim(xhr));
 			},
 			error: function() {
-				log("<span class=\"log-error\">Error, possible loop</span>");
-			}
+				log("<span class=\"log-error\">Error: shell timed out</span>");
+			},
+			timeout: 5000
 		});
-		$("#console").scrollTop($("#console").outerHeight());
 	});
+
+
+
+	setInterval(function() {
+		var that = $(".log-waiting");
+		if (that.text().length < 3) that.text(that.text() + ".");
+		else that.text("");
+	}, 300);
 </script>

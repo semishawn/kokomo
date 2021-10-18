@@ -101,11 +101,13 @@ input[name="layout"]:checked + .layout {
 
 
 /* Stack */
-.stack {
+/* .stack {
 	display: flex;
 	flex-direction: column-reverse;
 	justify-content: space-between;
-}
+} */
+
+.stack .code-box {position: relative;}
 
 .stack-icon {
 	display: flex;
@@ -122,7 +124,6 @@ input[name="layout"]:checked + .layout {
 
 
 /* Boxes */
-.boxes .code-box {position: absolute;}
 .boxes .code-box:nth-child(3) {
 	top: 0;
 	height: calc(50% - (var(--code-box-margin) / 2));
@@ -190,7 +191,6 @@ input[name="layout"]:checked + .layout {
 
 /* Tabs */
 .tabs .code-box {
-	position: absolute;
 	height: 100%;
 	width: 100%;
 	box-shadow: none;

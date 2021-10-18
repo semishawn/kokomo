@@ -180,7 +180,7 @@ button {
 	transform: scaleX(1);
 }
 .primary-functions-container .funky-btn {
-	min-width: 100px;
+	min-width: 105px;
 	padding: 0;
 }
 .run {--funky-hover: #5f5;}
@@ -339,8 +339,8 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 
 
 
-/* Console */
-.console-container {
+/* terminal */
+.terminal-container {
 	position: absolute;
 	top: var(--half-padding);
 	bottom: var(--half-padding);
@@ -354,18 +354,21 @@ input[name="result-zoom"]:checked + .zoom-toggle {
 	overflow: hidden;
 }
 
-#console {
+#terminal {
 	flex: 1;
 	width: 100%;
-	font-family: 'Fira Code', monospace;
+	font-family: 'Fira Mono', monospace;
 	font-size: 14px;
 	padding: 10px;
 	color: white;
 	background: #222;
-	white-space: pre;
+	white-space: pre-wrap;
+	word-break: break-all;
 	overflow-y: scroll;
 	box-sizing: border-box;
 }
+
+.log-waiting {display: none;}
 
 .log-error {color: #f55;}
 

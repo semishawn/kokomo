@@ -53,7 +53,7 @@ $(".save").click(function() {
 // Clear everything
 $(".reset").click(function() {
 	$(".CodeMirror").each((i, e) => e.CodeMirror.setValue(""));
-	$("#console").html("");
+	$("#terminal").html("");
 	if (typeof result !== "undefined") {
 		result.document.open();
 		result.document.write("");
@@ -101,9 +101,9 @@ $(".samples-btn").click(function() {
 
 
 
-// Clear console
-$(".console-clear-btn").click(function() {
-	$("#console").html("");
+// Clear terminal
+$(".terminal-clear-btn").click(function() {
+	$("#terminal").html("");
 });
 
 
