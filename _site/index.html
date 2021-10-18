@@ -44,22 +44,24 @@
 			background: linear-gradient(135deg, #C6FFDD, #FBD786, #f7797d);
 		}
 
+		span {
+			display: flex;
+			align-items: center;
+			font-size: 60px;
+			font-weight: 700;
+			font-style: italic;
+			margin: 30px 0;
+		}
+
 		.homepage-logo {
-			height: 120px;
-			animation: rocking 2s ease-in-out infinite;
+			height: 110px;
+			animation: rocking 2s steps(1) infinite;
 		}
 
 		@keyframes rocking {
 			0% {transform: rotate(-15deg);}
 			50% {transform: rotate(15deg);}
 			100% {transform: rotate(-15deg);}
-		}
-
-		span {
-			font-size: 50px;
-			font-weight: 700;
-			font-style: italic;
-			margin: 25px 0;
 		}
 
 		.editor-link-container {
@@ -101,7 +103,7 @@
 
 <body>
 	<img class="homepage-logo" src="img/logo.svg">
-	<span>{ Kokomo Language Editors }</span>
+	<span>{ Kokomo Editors }</span>
 	<div class="editor-link-container">
 		<a class="editor-link web-link" href="editors/web.html">
 			<div class="editor-icon-container">

@@ -1,9 +1,8 @@
 # Kokomo
-A happy and healthy in-browser text editor.\
-Sort of finished.
+A happy, healthy, and *sexy* in-browser text editor engine.\
 
 # Try It!
-* Github Pages: [semishawn.github.io/kokomo](https://semishawn.github.io/kokomo/)
-* Glitch: [kokomo.glitch.me](https://kokomo.glitch.me)
+* [Github Pages](https://semishawn.github.io/kokomo/)
+* [Glitch](https://kokomo.glitch.me)
 
 Enjoy! 🍹
