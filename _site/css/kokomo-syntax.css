@@ -1,7 +1,11 @@
 .cm-s-kokomo-syntax.CodeMirror {background: #343D46; color: #E5E6DD;}
 .cm-s-kokomo-syntax div.CodeMirror-selected {background: #45525c;}
-.cm-s-kokomo-syntax .CodeMirror-line::selection, .cm-s-kokomo-syntax .CodeMirror-line > span::selection, .cm-s-kokomo-syntax .CodeMirror-line > span > span::selection {background: #45525c;}
-.cm-s-kokomo-syntax .CodeMirror-line::-moz-selection, .cm-s-kokomo-syntax .CodeMirror-line > span::-moz-selection, .cm-s-kokomo-syntax .CodeMirror-line > span > span::-moz-selection {background: rgba(25, 30, 42, 99);}
+.cm-s-kokomo-syntax .CodeMirror-line::selection,
+.cm-s-kokomo-syntax .CodeMirror-line > span::selection,
+.cm-s-kokomo-syntax .CodeMirror-line > span > span::selection {background: #45525c;}
+.cm-s-kokomo-syntax .CodeMirror-line::-moz-selection,
+.cm-s-kokomo-syntax .CodeMirror-line > span::-moz-selection,
+.cm-s-kokomo-syntax .CodeMirror-line > span > span::-moz-selection {background: rgba(25, 30, 42, 99);}
 .cm-s-kokomo-syntax .CodeMirror-gutters {background: #343D46; border-right: 0px;}
 .cm-s-kokomo-syntax .CodeMirror-guttermarker {color: white;}
 .cm-s-kokomo-syntax .CodeMirror-guttermarker-subtle {color: rgba(112, 122, 140, 66);}
@@ -39,6 +43,13 @@
 .cm-s-kokomo-syntax span.cm-variable {color: #cbccc6;}
 .cm-s-kokomo-syntax span.cm-variable-2 {color: #f28779;}
 .cm-s-kokomo-syntax span.cm-variable-3 {color: #5ccfe6;}
+.cm-s-kokomo-syntax span.cm-type {color: #ffa759;}
+.cm-s-kokomo-syntax span.cm-def {color: #ffd580;}
+.cm-s-kokomo-syntax span.cm-bracket {color: rgba(92, 207, 230, 80);}
+.cm-s-kokomo-syntax span.cm-tag {color: #5ccfe6;}
+.cm-s-kokomo-syntax span.cm-header {color: #bae67e;}
+.cm-s-kokomo-syntax span.cm-link {color: #5ccfe6;}
+.cm-s-kokomo-syntax span.cm-error {color: #ff3333;}
 
 
 /* Extra */
