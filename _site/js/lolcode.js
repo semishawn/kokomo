@@ -23,9 +23,9 @@ KTHXBYE
 
 increment:`
 HAI 1.3
-	I HAS A var ITZ 0
-	IM IN YR loop UPPIN YR var TIL BOTH SAEM var AN 10
-		VISIBLE SUM OF var AN 1
+	I HAS A count ITZ 0
+	IM IN YR loop UPPIN YR count TIL BOTH SAEM count AN 10
+		VISIBLE SUM OF count AN 1
 	IM OUTTA YR loop
 KTHXBYE
 `,
