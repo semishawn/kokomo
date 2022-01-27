@@ -17,7 +17,7 @@ CodeMirror.defineSimpleMode("lolcode", {
 samples = {
 visible:`
 HAI 1.3
-	VISIBLE \"Hello world!\"
+	VISIBLE \"Hello World\"
 KTHXBYE
 `,
 

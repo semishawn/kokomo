@@ -14,7 +14,7 @@ CodeMirror.defineSimpleMode("befunge", {
 
 samples = {
 commas:`
-"dlrow olleH" ,,,,,,,,,,, @
+"dlroW olleH" ,,,,,,,,,,, @
 `,
 
 loop:`
@@ -22,13 +22,13 @@ v
 
                   v  ,  <
 
->  "dlrow olleH"  >  :  |
+>  "dlroW olleH"  >  :  |
 
                         @
 `,
 
 bridge:`
-"dlrow olleH">:#,_@
+"dlroW olleH">:#,_@
 `,
 
 random3:`
